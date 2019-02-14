@@ -3,13 +3,13 @@ import {projects, navTags} from "./portfolio-content";
 import "./App.scss";
 import "./themes.scss";
 
-class App extends React.Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       theme: 7, //Math.floor(Math.random() * themes.length),
       dark: true,
-      hash: parseHash(window.location.hash)
+      hash: this.parseHash(window.location.hash)
     };
     this.themes = [];
     for (let i = 0; i < 11; i++) {
@@ -59,6 +59,7 @@ class App extends React.Component {
             {value => <div>{value.x}</div>}
           </Motion>*/
   changeTheme() {
+    const themes = this.themes;
     let newTheme = this.state.theme;
     while (themes.length > 1 && newTheme === this.state.theme) {
       newTheme = Math.floor(Math.random() * themes.length);
@@ -78,7 +79,7 @@ class App extends React.Component {
   }
 }
 
-class FilteredThumbnailList extends React.Component {
+class FilteredThumbnailList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -133,7 +134,7 @@ class FilteredThumbnailList extends React.Component {
     this.setState({activeFilters: newFilters});
   }
 }
-class FilterSelect extends React.Component {
+class FilterSelect extends Component {
   render() {
     return (<div className="filterButtons">
       {this.props.tags.map(tag => this.renderFilterButton(tag))}
@@ -152,16 +153,16 @@ class FilterSelect extends React.Component {
     </button>);
   }
 }
-class ProjectThumbnail extends React.Component {
+class ProjectThumbnail extends Component {
   constructor(props) {
     super(props);
 
-    this.handleNavigation = this.handleNavigation.bind(this);
+    // this.handleNavigation = this.handleNavigation.bind(this);
   }
   render() {
     const tags = this.props.tags && this.props.tags.map(tag => <li key={tag}>{tag}</li>);
     const imageStyle = {
-      backgroundImage: "url('../img/" + this.props.imgref + "')"
+      backgroundImage: "url('./img/" + this.props.imgref + "')"
     };
     const handleNavigation = event => {
       window.location.hash = this.props.hash;
@@ -176,7 +177,7 @@ class ProjectThumbnail extends React.Component {
     </button>);
   }
 }
-class ProjectTile extends React.Component {
+class ProjectTile extends Component {
   render() {
     const active = this.props.active
       ? " active"

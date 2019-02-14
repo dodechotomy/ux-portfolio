@@ -24,11 +24,15 @@ button {
   height: 100%;
   min-height: 100vh;
   overflow-x: hidden;
+  p,div,input,textarea,select, button{
+    font-family: "Open Sans", sans-serif;
+  }
 }
 @for $i from 1 through 6 {
   h#{$i} {
     font-family: "Arvo", sans-serif;
     transition: color $easing, background-color $easing;
+    font-weight: 400;
   }
 }
 header {
@@ -83,7 +87,7 @@ header {
   .thumbnailImage {
     background: {
       position: center;
-      // image: url("../img/ducks.jpg");
+      image: url("http://dev.scott-wilson.ca/img/ducks.jpg");
       size: cover;
     }
     // filter: grayscale(80%) contrast(110%);

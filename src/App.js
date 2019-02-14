@@ -114,7 +114,7 @@ class FilteredThumbnailList extends Component {
       <ul className="thumbnailList">
         {
           allItems.map((item, index) => {
-            return (<ProjectThumbnail className={disabledItems.includes(item)
+            return (<ProjectTile className={disabledItems.includes(item)
                 ? "disabled"
                 : ""} key={item.name} id={index} activeOverlay={item.hash === this.props.hash} {...item}/>);
           })
@@ -153,7 +153,7 @@ class FilterSelect extends Component {
     </button>);
   }
 }
-class ProjectThumbnail extends Component {
+class ProjectTile extends Component {
   constructor(props) {
     super(props);
 
@@ -162,22 +162,24 @@ class ProjectThumbnail extends Component {
   render() {
     const tags = this.props.tags && this.props.tags.map(tag => <li key={tag}>{tag}</li>);
     const imageStyle = {
-      backgroundImage: "url('./img/" + this.props.imgref + "')"
+      backgroundImage: "url('http://dev.scott-wilson.ca/img/thumb/" + this.props.imgref + "')"
+        // backgroundImage: "url('./img/" + this.props.imgref + "')"
     };
     const handleNavigation = event => {
       window.location.hash = this.props.hash;
     };
-    return (<button className={"thumbnail " + this.props.className} onClick={handleNavigation}>
-      <ProjectTile active={this.props.activeOverlay} style={imageStyle}/>
+    return (
+      <div className={"thumbnail " + this.props.className} onClick={handleNavigation}>
+      <ProjectThumbnail active={this.props.activeOverlay} style={imageStyle}/>
       <div className="backgroundColor">
         <h3>{this.props.name}</h3>
         {this.props.tags && <ul className="tagList">{tags}</ul>}
         {this.props.description && (<p className="thumbnailDescription">{this.props.description}</p>)}
       </div>
-    </button>);
+    </div>);
   }
 }
-class ProjectTile extends Component {
+class  ProjectThumbnail extends Component {
   render() {
     const active = this.props.active
       ? " active"

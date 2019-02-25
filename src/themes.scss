@@ -2,6 +2,7 @@
   &.App {
     color: $text;
     background-color: $background;
+
     .backgroundColor {
       background-color: $background;
     }
@@ -10,24 +11,38 @@
         color: $heading;
       }
     }
-    p,
+
     div,
+    p,
     span {
       color: $text;
     }
+
+    header {
+      background-color: $background;
+    }
+
     button {
       background-color: $foreground;
       color: $text;
+
       &.active,
       &:hover {
         background-color: $active;
         color: $text;
       }
     }
+
+    .overlay::before {
+      background-color: $background;
+      opacity: 0.5;
+    }
+
     ::selection {
       background-color: $text;
       color: $background;
     }
+
     ::-moz-selection {
       background-color: $text;
       color: $background;
@@ -36,22 +51,11 @@
 }
 @mixin theme($name, $hue) {
   .theme-#{$name}-light {
-    @include theme-colors(
-      $text: hsl($hue, 60%, 7%),
-      $heading: hsl($hue, 80%, 40%),
-      $background: hsl($hue, 90%, 100%),
-      $foreground: hsl($hue, 80%, 80%),
-      $active: hsl(($hue + 12) %360, 80%, 65%)
-    );
+    @include theme-colors($text: hsl($hue, 60%, 7%), $heading: hsl($hue, 80%, 40%), $background: hsl($hue, 90%, 100%), $foreground: hsl($hue, 80%, 80%), $active: hsl(($hue + 12) %360, 80%, 65%));
   }
+
   .theme-#{$name}-dark {
-    @include theme-colors(
-      $text: hsl($hue, 60%, 93%),
-      $heading: hsl($hue, 80%, 65%),
-      $background: hsl(($hue + 240) %360, 70%, 2%),
-      $foreground: hsl($hue, 80%, 20%),
-      $active: hsl(($hue + 12) %360, 80%, 35%)
-    );
+    @include theme-colors($text: hsl($hue, 60%, 93%), $heading: hsl($hue, 80%, 65%), $background: hsl(($hue + 240) %360, 70%, 2%), $foreground: hsl($hue, 80%, 20%), $active: hsl(($hue + 12) %360, 80%, 35%));
   }
 }
 @for $i from 0 through 11 {

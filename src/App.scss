@@ -1,161 +1,275 @@
 $easing: 0.15s ease-in-out;
-html,
+
+*,
 body,
-* {
+html {
   padding: 0;
   box-sizing: border-box;
   margin: 0;
   transition: color $easing, background-color $easing;
 }
+body,html{
+height: 100vh;
+overflow: hidden;
+}
+
 li {
   list-style: none;
 }
+
 button {
   background: none;
   border: none;
   padding: 0.5em;
   cursor: pointer;
 }
+
+#root{
+  overflow-y: auto;
+  height: 100%;
+}
+
 .App {
   font-family: "Open Sans", sans-serif;
   font-weight: 400;
-  padding: 1rem 0 1rem 1rem;
+  padding: 1rem 0;
   width: 100%;
-  height: 100%;
+  // height: 100%;
   min-height: 100vh;
   overflow-x: hidden;
-  p,div,input,textarea,select, button{
+  // overflow-y: auto;
+  position: relative;
+
+  // &.noscroll {
+  //   overflow: hidden;
+  // }
+
+  button,
+  div,
+  input,
+  p,
+  select,
+  textarea {
     font-family: "Open Sans", sans-serif;
   }
-}
-@for $i from 1 through 6 {
-  h#{$i} {
-    font-family: "Arvo", sans-serif;
-    transition: color $easing, background-color $easing;
-    font-weight: 400;
+  @for $i from 1 through 6 {
+    h#{$i} {
+      font-family: "Arvo", sans-serif;
+      transition: color $easing, background-color $easing;
+      font-weight: 400;
+    }
   }
-}
-header {
-  // text-align: left;
-  margin-bottom: 1.5rem;
-}
-.filterButtons {
-  margin-bottom: 1em;
-  & > button {
+
+  header {
+    // text-align: left;
+    // margin-bottom: 1.5rem;
+    z-index: 3;
+    padding-bottom: 1rem;
+  }
+
+  .filterButtons,
+  .tileList,
+  header {
+    padding-left: 1rem;
+  }
+
+  .filterButtons {
+    margin-bottom: 1em;
+
+    & > button {
+      position: relative;
+      transition: color $easing, background-color $easing;
+
+      &::before {
+        content: "";
+        background-color: inherit;
+        height: 0;
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        left: 0;
+        z-index: 0;
+        transition: height $easing;
+      }
+
+      &.active::before {
+        height: 0.25em;
+      }
+    }
+  }
+
+  .tileList {
+    display: grid;
+    grid-gap: 1rem 1rem;
+    grid-template-columns: repeat(auto-fill, 320px);
+    max-width: 70rem;
+    height: auto;
+    // grid-auto-columns: 20rem;
+    grid-auto-flow: row;
+    justify-content: left;
+    padding-bottom: 1rem;
+    padding-right: 1rem;
+  }
+
+  .tile {
+    opacity: 1;
+    width: 320px;
+    height: 320px;
+    max-width: 100vw;
+    max-height: 100vw;
+    padding: 10rem 0.75rem 0.75rem;
+    // margin: 0.5em;
     position: relative;
-    transition: color $easing, background-color $easing;
-    &::before {
-      content: "";
-      background-color: inherit;
-      height: 0em;
+    color: inherit;
+    text-decoration: none;
+    transition: opacity $easing;
+
+    .thumbnailImage {
+      background: {
+        position: center;
+        image: url("http://dev.scott-wilson.ca/img/ducks.jpg");
+        size: cover;
+      }
+      // filter: grayscale(80%) contrast(110%);
+      // width: 100%;
+      // height: 100%;
       position: absolute;
-      top: 100%;
-      width: 100%;
-      left: 0;
-      z-index: 0;
-      transition: height $easing;
-    }
-    &.active::before {
-      height: 0.25em;
-    }
-  }
-}
-.thumbnailList {
-  display: grid;
-  grid-gap: 1rem 1rem;
-  grid-template-columns: repeat(auto-fill, 20rem);
-  max-width: 70rem;
-  // grid-auto-columns: 20rem;
-  grid-auto-flow: row;
-  justify-content: left;
-  padding-bottom: 1rem;
-  padding-right: 1rem;
-}
-.thumbnail {
-  opacity: 1;
-  width: 100%;
-  height: 100%;
-  max-width: 100vw;
-  max-height: 100vw;
-  padding: 0.75rem;
-  padding-top: 10rem;
-  // margin: 0.5em;
-  position: relative;
-  color: inherit;
-  text-decoration: none;
-  transition: opacity $easing;
-  .thumbnailImage {
-    background: {
-      position: center;
-      image: url("http://dev.scott-wilson.ca/img/ducks.jpg");
-      size: cover;
-    }
-    // filter: grayscale(80%) contrast(110%);
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transition: transform $easing;
-    &.overlay.active {
-      position: fixed;
       top: 0;
       left: 0;
-      z-index: 0;
+      transition: transform $easing;
+    }
+
+    .overlay {
+      // display: none;
+      left: 100vw;
+      display: block;
+      position: fixed;
+      width: 95vw;
+      top: 0;
+      z-index: 4;
+      padding: 1rem;
+      transition: left $easing;
+
+      &::before {
+        z-index: -1;
+        content: '';
+        position: fixed;
+        display: none;
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+      }
+
+      .closeOverlay {
+        position: fixed;
+        left: 0;
+        top: 0;
+        transform: translate(-100%);
+        transition: transform $easing;
+        width: 5vw;
+        height: 100vw;
+        // font-weight: 300;
+        // font-size: 1.2em;
+        // background: none;
+        padding: 0;
+
+        // &::after {
+        //   content: "";
+        //   height: 100vh;
+        //   background: inherit;
+        //   width: 100%;
+        //   position: absolute;
+        //   top: 0;
+        //   left: 0;
+        //   z-index: -1;
+        // }
+
+        button {
+          width: 5vw;
+          height: 5vw;
+        }
+      }
+    }
+
+    &.active .overlay {
+      left: 5vw;
+
+      &::before {
+        display: block;
+        opacity: 0.25;
+      }
+
+      .closeOverlay {
+        transform: translate(0);
+      }
+    }
+
+    &.disabled {
+      opacity: 0.35;
+    }
+
+    &:focus,
+    &:hover {
+      opacity: 1;
+
+      .thumbnailImage {
+        transform: scale(1.02);
+        // filter: none;
+      }
+    }
+
+    div {
+      // display: grid;
+      // grid-template-columns: 100%;
+      // grid-gap: 0.5em;
+      // grid-auto-rows: 1fr;
+      flex-flow: column nowrap;
+      justify-content: flex-start;
+      width: 100%;
+      height: 100%;
+      padding: 0.5rem;
+      z-index: 2;
+      position: relative;
+
+      h3 {
+        justify-self: flex-start;
+      }
+
+      & > *:not(:last-child) {
+        margin-bottom: 0.5rem;
+      }
     }
   }
-  &.disabled {
-    opacity: 0.35;
+
+  .placeholder_message {
+    // font-style: italic;
+    font-weight: 300;
   }
-  &:hover,
-  &:focus {
-    opacity: 1;
-    .thumbnailImage {
-      transform: scale(1.02);
-      // filter: none;
+
+  .tagList {
+    display: block;
+    font-size: 0.8em;
+    font-weight: 300;
+    opacity: 0.9;
+
+    & > li {
+      display: inline;
+
+      &:not(:last-child):after {
+        content: " | ";
+      }
     }
   }
-  div {
-    // display: grid;
-    // grid-template-columns: 100%;
-    // grid-gap: 0.5em;
-    // grid-auto-rows: 1fr;
+
+  .themeButtons {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 5;
+    display: flex;
     flex-flow: column nowrap;
-    justify-content: flex-start;
-    width: 100%;
-    height: 100%;
-    padding: 0.5rem;
-    z-index: 2;
-    position: relative;
-    h3 {
-      justify-self: flex-start;
-    }
-    & > *:not(:last-child) {
-      margin-bottom: 0.5rem;
-    }
   }
-}
-.placeholder_message {
-  // font-style: italic;
-  font-weight: 300;
-}
-.tagList {
-  display: block;
-  font-size: 0.8em;
-  font-weight: 300;
-  opacity: 0.9;
-  & > li {
-    display: inline;
-    &:not(:last-child):after {
-      content: " | ";
-    }
-  }
-}
-.themeButtons {
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 3;
-  display: flex;
-  flex-flow: column nowrap;
 }

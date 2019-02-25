@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {projects, navTags} from "./portfolio-content";
 import "./App.scss";
 import "./themes.scss";
+import {Sticky, StickyContainer} from "react-sticky";
 
 class App extends Component {
   constructor(props) {
@@ -20,6 +21,7 @@ class App extends Component {
     this.toggleDarkMode = this.toggleDarkMode.bind(this);
     this.handleHashChange = this.handleHashChange.bind(this);
     window.addEventListener("hashchange", this.handleHashChange, false);
+    window.addEventListener("keydown", this.handleKeyDown, false);
   }
 
   parseHash(hash) {
@@ -28,29 +30,42 @@ class App extends Component {
       ? hash.substring(1)
       : hash);
   }
+  handleKeyDown(event) {
+    if (event.key === "Escape") {
+      window.location.hash = "";
+    }
+  };
   render() {
     console.log(this.state.hash);
     const theme = "theme-color" + this.themes[this.state.theme] + (
       this.state.dark
       ? "-dark"
       : "-light");
-
-    return (<div className={"App backgroundColor " + theme}>
-      <header>
-        <h1>Scott Wilson</h1>
-        <h2>Interaction Design Portfolio</h2>
-        <p>Hire me!</p>
-      </header>
-      <FilteredThumbnailList items={projects} tags={navTags} hash={this.state.hash}/>
-      <div className="themeButtons">
-        <button onClick={this.changeTheme}>mix it up</button>
-        <button className={this.state.dark
-            ? "active"
-            : ""} onClick={this.toggleDarkMode}>
-          dark mode
-        </button>
-      </div>
-    </div>);
+    const overlayIsActive = projects.some(project => {
+      return project.hash === this.state.hash;
+    });
+    const scrollStyle = overlayIsActive
+      ? " noscroll"
+      : ""
+    return (<StickyContainer className={"App backgroundColor " + theme + scrollStyle}>
+      <Sticky>{
+          ({style, isSticky}) => <header style={style}>
+              <h1>Scott Wilson</h1>
+              <h2>Interaction Design Portfolio</h2>
+              <p>Hire me!</p>
+              <div className="themeButtons">
+                <button onClick={this.changeTheme}>mix it up</button>
+                <button className={this.state.dark
+                    ? "active"
+                    : ""} onClick={this.toggleDarkMode}>
+                  dark mode
+                </button>
+              </div>
+            </header>
+        }
+      </Sticky>
+      <FilteredTileList items={projects} tags={navTags} hash={this.state.hash}/>
+    </StickyContainer>);
   }
   /*         <Motion
             defaultStyle={{ x: 0 }}
@@ -79,7 +94,7 @@ class App extends Component {
   }
 }
 
-class FilteredThumbnailList extends Component {
+class FilteredTileList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -111,7 +126,7 @@ class FilteredThumbnailList extends Component {
 
     return (<section>
       <FilterSelect value={this.state.activeFilters} onClick={this.handleChange} tags={this.props.tags}/>
-      <ul className="thumbnailList">
+      <ul className="tileList">
         {
           allItems.map((item, index) => {
             return (<ProjectTile className={disabledItems.includes(item)
@@ -161,30 +176,44 @@ class ProjectTile extends Component {
   }
   render() {
     const tags = this.props.tags && this.props.tags.map(tag => <li key={tag}>{tag}</li>);
-    const imageStyle = {
-      backgroundImage: "url('http://dev.scott-wilson.ca/img/thumb/" + this.props.imgref + "')"
-        // backgroundImage: "url('./img/" + this.props.imgref + "')"
-    };
-    const handleNavigation = event => {
+    const updateHash = event => {
       window.location.hash = this.props.hash;
     };
-    return (
-      <div className={"thumbnail " + this.props.className} onClick={handleNavigation}>
-      <ProjectThumbnail active={this.props.activeOverlay} style={imageStyle}/>
+    const handleNavigation = this.props.activeOverlay
+      ? null
+      : updateHash;
+    const activeClass = this.props.activeOverlay
+      ? " active"
+      : "";
+    return (<div className={"tile " + this.props.className + activeClass} onClick={handleNavigation}>
+      <ProjectThumbnail imgref={this.props.imgref}/>
       <div className="backgroundColor">
         <h3>{this.props.name}</h3>
         {this.props.tags && <ul className="tagList">{tags}</ul>}
         {this.props.description && (<p className="thumbnailDescription">{this.props.description}</p>)}
       </div>
+      <ProjectOverlay {...this.props}></ProjectOverlay>
     </div>);
   }
 }
-class  ProjectThumbnail extends Component {
+class ProjectThumbnail extends Component {
   render() {
-    const active = this.props.active
-      ? " active"
-      : "";
-    return (<div className={"thumbnailImage overlay" + active} style={this.props.style}/>);
+    const imageSrc = "http://dev.scott-wilson.ca/img/thumb/" + this.props.imgref;
+    return (<img className={"thumbnailImage"} src={imageSrc} width={320} height={320}/>);
+  }
+}
+class ProjectOverlay extends Component {
+  render() {
+    const tags = this.props.tags && this.props.tags.map(tag => <li key={tag}>{tag}</li>);
+    const closeOverlay = () => {
+      window.location.hash = "";
+    };
+    return (<div className="overlay backgroundColor">
+      <div className="closeOverlay" onClick={closeOverlay}><button>╳</button></div>
+      <h3>{this.props.name}</h3>
+      {this.props.tags && <ul className="tagList">{tags}</ul>}
+      {this.props.description && (<p className="thumbnailDescription">{this.props.description}</p>)}
+    </div>);
   }
 }
 

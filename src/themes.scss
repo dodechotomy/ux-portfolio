@@ -3,6 +3,17 @@
     color: $text;
     background-color: $background;
 
+    &::before {
+      content: '';
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      position: fixed;
+      background-color: $background;
+      z-index: -2;
+    }
+
     .backgroundColor {
       background-color: $background;
     }
@@ -13,6 +24,7 @@
     }
 
     div,
+    li,
     p,
     span {
       color: $text;
@@ -25,11 +37,40 @@
     button {
       background-color: $foreground;
       color: $text;
+      box-sizing: border-box;
+      position: relative;
 
       &.active,
+      &:focus,
       &:hover {
         background-color: $active;
         color: $text;
+      }
+    }
+    // :focus,:focus::before,:focus::after{
+    //   border: solid 1px red;
+    // }
+    article:focus {
+      outline: none;
+    }
+
+    .focusable,
+    a,
+    button,
+    input {
+      &:focus {
+        content: '';
+        // width: 90%;
+        // height: 90%;
+        // position: absolute;
+        // top: 50%;
+        // left: 50%;
+        // transform: translate(-50%,-50%);
+        outline: 1px solid $text;
+        // outline-offset: 0.1em;
+        // z-index: 3;
+        // pointer-events: none;
+        z-index: 2;
       }
     }
 
@@ -51,7 +92,7 @@
 }
 @mixin theme($name, $hue) {
   .theme-#{$name}-light {
-    @include theme-colors($text: hsl($hue, 60%, 7%), $heading: hsl($hue, 80%, 40%), $background: hsl($hue, 90%, 100%), $foreground: hsl($hue, 80%, 80%), $active: hsl(($hue + 12) %360, 80%, 65%));
+    @include theme-colors($text: hsl($hue, 60%, 7%), $heading: hsl($hue, 80%, 40%), $background: hsl($hue, 90%, 100%), $foreground: hsl($hue, 80%, 70%), $active: hsl(($hue + 12) %360, 80%, 65%));
   }
 
   .theme-#{$name}-dark {

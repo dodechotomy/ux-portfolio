@@ -2,8 +2,11 @@ import React, {Component} from 'react';
 import {projects, navTags} from "./portfolio-content";
 import "./App.scss";
 import "./themes.scss";
-import {Sticky, StickyContainer} from "react-sticky";
 
+window.addEventListener("click", (event) => {
+  console.log("clicked:");
+  console.log(event.target);
+}, false);
 class App extends Component {
   constructor(props) {
     super(props);
@@ -44,28 +47,20 @@ class App extends Component {
     const overlayIsActive = projects.some(project => {
       return project.hash === this.state.hash;
     });
-    const scrollStyle = overlayIsActive
-      ? " noscroll"
-      : ""
-    return (<StickyContainer className={"App backgroundColor " + theme + scrollStyle}>
-      <Sticky>{
-          ({style, isSticky}) => <header style={style}>
-              <h1>Scott Wilson</h1>
-              <h2>Interaction Design Portfolio</h2>
-              <p>Hire me!</p>
-              <div className="themeButtons">
-                <button onClick={this.changeTheme}>mix it up</button>
-                <button className={this.state.dark
-                    ? "active"
-                    : ""} onClick={this.toggleDarkMode}>
-                  dark mode
-                </button>
-              </div>
-            </header>
-        }
-      </Sticky>
-      <FilteredTileList items={projects} tags={navTags} hash={this.state.hash}/>
-    </StickyContainer>);
+    // console.log("overlayIsActive", overlayIsActive);
+    // const scrollStyle = overlayIsActive
+    //   ? " noscroll"
+    //   : ""
+    return (<div className={"App backgroundColor " + theme} role="presentation">
+      <header role="banner">
+        <h1>Scott Wilson</h1>
+        <h2>Interaction Design Portfolio</h2>
+        <p>Hire me!</p>
+        <ThemeButtons disabled={overlayIsActive} changeTheme={this.changeTheme} dark={this.state.dark} toggleDarkMode={this.toggleDarkMode}/>
+      </header>
+      <FilteredTileList disabled={overlayIsActive} items={projects} tags={navTags} hash={this.state.hash}/>
+
+    </div>);
   }
   /*         <Motion
             defaultStyle={{ x: 0 }}
@@ -88,9 +83,36 @@ class App extends Component {
   }
   handleHashChange(event) {
     const newHash = this.parseHash(window.location.hash);
+    const oldHash = this.state.hash;
     if (newHash !== this.state.hash) {
       this.setState({hash: newHash});
+      if (newHash) {
+        const focusElement = document.getElementById(newHash);
+        if (focusElement) {
+          focusElement.focus();
+          focusElement.scrollTo(0, 0);
+        }
+      } else if (oldHash) {
+        const focusElement = document.getElementById("tile-" + oldHash);
+        if (focusElement) {
+          focusElement.focus();
+        }
+      }
     }
+  }
+}
+
+class ThemeButtons extends Component {
+  render() {
+    return (<div className="themeButtons">
+      <button onClick={this.props.changeTheme}>mix it up</button>
+      <button aria-pressed={this.props.dark} className={"toggleButton vertical " + (
+          this.props.dark
+          ? "selected"
+          : "")} onClick={this.props.toggleDarkMode}>
+        dark mode
+      </button>
+    </div>);
   }
 }
 
@@ -102,18 +124,22 @@ class FilteredTileList extends Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.updateHash = this.updateHash.bind(this);
   }
+  updateHash(newHash) {
+    window.location.hash = newHash;
+  };
   render() {
     let activeItems = this.props.items;
-    let disabledItems = [];
+    let inactiveItems = [];
     if (this.state.activeFilters.length > 0) {
       const sharesTag = item => item.tags.some(tag => this.state.activeFilters.includes(tag));
       activeItems = this.props.items.filter(sharesTag);
-      disabledItems = this.props.items.filter(item => !sharesTag(item));
+      inactiveItems = this.props.items.filter(item => !sharesTag(item));
     }
     const allItems = [
       ...activeItems,
-      ...disabledItems
+      ...inactiveItems
     ];
     let emptyListMessage = null;
     if (activeItems.length === 0) {
@@ -124,18 +150,26 @@ class FilteredTileList extends Component {
       </span>);
     }
 
-    return (<section>
-      <FilterSelect value={this.state.activeFilters} onClick={this.handleChange} tags={this.props.tags}/>
-      <ul className="tileList">
+    return (<section disabled={this.props.disabled}>
+      <FilterSelect disabled={this.props.disabled} value={this.state.activeFilters} onClick={this.handleChange} tags={this.props.tags}/>
+      <ul className="tileList" aria-label="Projects list">
         {
           allItems.map((item, index) => {
-            return (<ProjectTile className={disabledItems.includes(item)
-                ? "disabled"
-                : ""} key={item.name} id={index} activeOverlay={item.hash === this.props.hash} {...item}/>);
+            const inactive = inactiveItems.includes(item);
+            return (<ProjectTile updateHash={this.updateHash} disabled={this.props.disabled} className={inactive
+                ? "inactive"
+                : ""} key={item.name} id={index} {...item}/>);
           })
         }
       </ul>
       {emptyListMessage}
+      <div className="projectOverlays">
+        {
+          allItems.map((item, index) => {
+            return (<ProjectOverlay key={item.name} id={index} active={item.hash === this.props.hash} {...item}/>);
+          })
+        }
+      </div>
     </section>);
   }
   handleChange(event) {
@@ -151,70 +185,192 @@ class FilteredTileList extends Component {
 }
 class FilterSelect extends Component {
   render() {
-    return (<div className="filterButtons">
+    return (<div aria-label="Filter by Tags" className="filterButtons">
       {this.props.tags.map(tag => this.renderFilterButton(tag))}
     </div>);
   }
   renderFilterButton(currentTag) {
-    let active = this.props.value.includes(currentTag);
-    return (<button key={currentTag} value={currentTag} onClick={this.props.onClick} name="filter" title={(
-        active
+    let selected = this.props.value.includes(currentTag);
+    return (<button aria-pressed={selected} disabled={this.props.disabled} key={currentTag} {...tabIndex(this.props.disabled)} value={currentTag} onClick={this.props.onClick} name="filter" title={(
+        selected
         ? "hide "
-        : "show ") + currentTag + " projects"} className={"filterButton " + (
-        active
-        ? "active"
+        : "show ") + currentTag + " projects"} className={"toggleButton horizontal " + (
+        selected
+        ? "selected"
         : "")}>
       {currentTag}
     </button>);
   }
 }
 class ProjectTile extends Component {
-  constructor(props) {
-    super(props);
-
-    // this.handleNavigation = this.handleNavigation.bind(this);
-  }
+  // constructor(props) {
+  //   super(props);
+  //
+  //    this.handleNavigation = this.handleNavigation.bind(this);
+  // }
   render() {
-    const tags = this.props.tags && this.props.tags.map(tag => <li key={tag}>{tag}</li>);
-    const updateHash = event => {
-      window.location.hash = this.props.hash;
-    };
-    const handleNavigation = this.props.activeOverlay
-      ? null
-      : updateHash;
+    // const tags = this.props.tags && this.props.tags.map(tag => <li key={tag}>{tag}</li>);
+    // const updateHash = () => this.props.updateHash(this.props.hash);
+    // const handleNavigation = this.props.activeOverlay
+    //   ? null
+    //   : updateHash;
     const activeClass = this.props.activeOverlay
       ? " active"
       : "";
-    return (<div className={"tile " + this.props.className + activeClass} onClick={handleNavigation}>
-      <ProjectThumbnail imgref={this.props.imgref}/>
+    const tileTitle = "tile-title-" + this.props.hash;
+    return (<a href={"#" + this.props.hash} id={"tile-" + this.props.hash} aria-labelledby={tileTitle} className={"tile " + this.props.className + activeClass} {...tabIndex(this.props.disabled)} disabled={this.props.disabled}>
+
+      <ProjectThumbnail { ...this.props}/>
       <div className="backgroundColor">
-        <h3>{this.props.name}</h3>
-        {this.props.tags && <ul className="tagList">{tags}</ul>}
-        {this.props.description && (<p className="thumbnailDescription">{this.props.description}</p>)}
+        <h3 id={tileTitle}>{this.props.name}</h3>
+        <TagList tags={this.props.tags}/> {this.props.description && (<p className="thumbnailDescription">{this.props.description}</p>)}
       </div>
-      <ProjectOverlay {...this.props}></ProjectOverlay>
-    </div>);
+    </a>);
   }
 }
 class ProjectThumbnail extends Component {
   render() {
-    const imageSrc = "http://dev.scott-wilson.ca/img/thumb/" + this.props.imgref;
-    return (<img className={"thumbnailImage"} src={imageSrc} width={320} height={320}/>);
+    const imageSrc = "http://dev.scott-wilson.ca/img/thumb/" + this.props.thumbnail.src;
+    return (<Image {...this.props.thumbnail} src={imageSrc} width={320} height={320} className={this.props.className + " thumbnailImage"}/>);
   }
+}
+function tabIndex(disabled) {
+  return {
+    tabIndex: disabled
+      ? "-1"
+      : "0"
+  };
 }
 class ProjectOverlay extends Component {
   render() {
-    const tags = this.props.tags && this.props.tags.map(tag => <li key={tag}>{tag}</li>);
     const closeOverlay = () => {
       window.location.hash = "";
     };
-    return (<div className="overlay backgroundColor">
-      <div className="closeOverlay" onClick={closeOverlay}><button>╳</button></div>
-      <h3>{this.props.name}</h3>
-      {this.props.tags && <ul className="tagList">{tags}</ul>}
-      {this.props.description && (<p className="thumbnailDescription">{this.props.description}</p>)}
-    </div>);
+    const classNames = "overlay " + (
+      this.props.active
+      ? " active"
+      : "");
+    const disabled = !this.props.active;
+    const headingID = "heading-" + this.props.hash;
+    return (<section aria-labelledby={headingID} className={classNames}>
+      <div role="button" aria-label="Close" className="closeOverlay" onClick={closeOverlay}>
+        <button role="presentation" disabled={disabled} {...tabIndex(disabled)}>╳</button>
+      </div>
+      <ProjectPage headingID={headingID} disabled={disabled} {...this.props}/>
+    </section>);
   }
+}
+function ProjectPage(props) {
+
+  const content = [];
+  if (props.content) {
+    props.content.forEach(block => {
+      content.push(<ContentBlock key={block.heading} {...block}></ContentBlock>)
+    });
+  }
+  return (<article id={props.hash} {...tabIndex(props.disabled)} disabled={props.disabled} className="backgroundColor projectPage">
+    <header>
+      <h3 id={props.headingID}>{props.name}</h3>
+      <TagList tags={props.tags}/>
+      <p className="thumbnailDescription">{props.description}</p>
+    </header>
+    {content}
+  </article>);
+}
+function ContentBlock(props) {
+  return (<div key={props.heading} className="contentBlock">
+    <section className={"contentSection" + (
+        props.visual
+        ? ""
+        : " fullRow")}>
+      <h4>{props.heading}</h4>
+      <p>{props.text}</p>
+    </section>
+    {props.visual && <VisualBlock {...props.visual} className="contentVisual"/>}
+  </div>);
+}
+function VisualBlock(props) {
+  const {
+    type,
+    ...newProps
+  } = props;
+  console.log(newProps);
+  switch (type) {
+    case "image":
+      return <Image {...newProps}/>
+    case "video":
+      return <Video {...newProps}/>
+    case "vimeo":
+      return <VimeoEmbed {...newProps}/>
+    default:
+      return null;
+  }
+}
+
+function Image(props) {
+  if (Array.isArray(props.sources)) {
+    const {
+      sources,
+      width,
+      height,
+      alt,
+      defaultSrc,
+      ...restProps
+    } = props;
+    return (<div {...restProps}>
+      <picture >
+        {sources.map(s => (<source media={s.media} key={s.src} srcset={s.src} type={s.type}/>))}
+        <img src={defaultSrc} width={width} height={height} alt={alt}/>
+      </picture>
+    </div>)
+  } else {
+    return (<img {...props}/>);
+  }
+}
+function Video(props) {
+  const {
+    sources,
+    className,
+    style,
+    ...restProps
+  } = props;
+  const newClassName = (className || "") + " blurBackground center";
+  const newStyle = {
+    backgroundImage: "url('http://dev.scott-wilson.ca/img/ducks.jpg')"
+  };
+  return (<div {...restProps} style={newStyle} className={newClassName} role="presentation">
+    <video controls="controls">
+      {
+        Array.isArray(sources)
+          ? sources.map(s => (<source key={s.src} src={s.src} type={s.type}/>))
+          : (<source src={sources.src} type={sources.type}/>)
+      }
+      Your browser does not support the video tag.
+    </video>
+  </div>);
+}
+function VimeoEmbed(props) {
+  const {
+    src,
+    title,
+    width,
+    height,
+    className,
+    style,
+    ...restProps
+  } = props;
+  const newClassName = (className || "") + " blurBackground center";
+  const newStyle = {
+    backgroundImage: "url('http://dev.scott-wilson.ca/img/ducks.jpg')",
+    paddingBottom: height/width*100 + "%",
+    height: "auto"
+  };
+  return (<div {...restProps} style={newStyle} className={newClassName} role="presentation">
+    <iframe src={src} title={title} width="100%" frameBorder="0" webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen" allowFullScreen="allowFullScreen"/>
+  </div>);
+}
+function TagList(props) {
+  return (<ul className="tagList">{props.tags.map(tag => <li key={tag}>{tag + " "}</li>)}</ul>);
 }
 
 export default App;

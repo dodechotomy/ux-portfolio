@@ -39,13 +39,29 @@ export const projects = [{
       text: "I started by looking at puzzles I personally loved. I drew inspiration from one puzzle in particular, called Slitherlink, created by Nikoli who also created Sudoku. I used paper prototypes and recruited a variety of players to test out possible puzzle types. Some players came back to help test multiple iterations, and others were new to the project, only trying a single version. The main things I was looking for in a puzzle was that the rules can be learned without guidance or supervision, and that I could conceive of a way to make the puzzle in physical form. After creating and testing several different puzzle types, I landed on a rotating rings puzzle that worked well with the physical forms I was considering. This type of puzzle had a number of benefits:",
       visual: {
         type: "vimeo",
-        src: 'https://player.vimeo.com/video/266867847?loop=1',
+        src: 'https://player.vimeo.com/video/266817920?loop=1',//wide
+        width: 640,
+        height: 360,
+        // src: 'https://player.vimeo.com/video/266867847?loop=1',//tall
+        // width: 640,
+        // height: 1382,
+        title: "Geometric Puzzle Sphere - Interaction"
+      }
+    },{
+      heading: "Heading 3",
+      text: "I started by looking at puzzles I personally loved. I drew inspiration from one puzzle in particular, called Slitherlink, created by Nikoli who also created Sudoku. I used paper prototypes and recruited a variety of players to test out possible puzzle types. Some players came back to help test multiple iterations, and others were new to the project, only trying a single version. The main things I was looking for in a puzzle was that the rules can be learned without guidance or supervision, and that I could conceive of a way to make the puzzle in physical form. After creating and testing several different puzzle types, I landed on a rotating rings puzzle that worked well with the physical forms I was considering. This type of puzzle had a number of benefits:",
+      visual: {
+        type: "vimeo",
+        // src: 'https://player.vimeo.com/video/266817920?loop=1',//wide
+        // width: 640,
+        // height: 360,
+        src: 'https://player.vimeo.com/video/266867847?loop=1',//tall
         width: 640,
         height: 1138,
         title: "Geometric Puzzle Sphere - Interaction"
       }
     }, {
-      heading: "Heading 3",
+      heading: "Heading 4",
       text: "I started by looking at puzzles I personally loved. I drew inspiration from one puzzle in particular, called Slitherlink, created by Nikoli who also created Sudoku. I used paper prototypes and recruited a variety of players to test out possible puzzle types. Some players came back to help test multiple iterations, and others were new to the project, only trying a single version. The main things I was looking for in a puzzle was that the rules can be learned without guidance or supervision, and that I could conceive of a way to make the puzzle in physical form. After creating and testing several different puzzle types, I landed on a rotating rings puzzle that worked well with the physical forms I was considering. This type of puzzle had a number of benefits:",
       visual: {
         type: "video",
@@ -53,8 +69,8 @@ export const projects = [{
           src: 'http://dev.scott-wilson.ca/vid/scott-wilson-puzzle-cube-interaction.mp4',
           type: "video/mp4"
         }],
-        width: 720/2,
-        height: 1280/2
+        width: 720,
+        height: 1280
       }
     }]
   },

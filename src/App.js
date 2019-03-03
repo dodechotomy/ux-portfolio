@@ -2,11 +2,9 @@ import React, {Component} from 'react';
 import {projects, navTags} from "./portfolio-content";
 import "./App.scss";
 import "./themes.scss";
+import resizeVideos from './videoResize.js'
 
-window.addEventListener("click", (event) => {
-  console.log("clicked:");
-  console.log(event.target);
-}, false);
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -25,6 +23,7 @@ class App extends Component {
     this.handleHashChange = this.handleHashChange.bind(this);
     window.addEventListener("hashchange", this.handleHashChange, false);
     window.addEventListener("keydown", this.handleKeyDown, false);
+    resizeVideos();
   }
 
   parseHash(hash) {
@@ -269,32 +268,33 @@ function ProjectPage(props) {
     });
   }
   return (<article id={props.hash} {...tabIndex(props.disabled)} disabled={props.disabled} className="backgroundColor projectPage">
-    <header>
-      <h3 id={props.headingID}>{props.name}</h3>
-      <TagList tags={props.tags}/>
-      <p className="thumbnailDescription">{props.description}</p>
-    </header>
-    {content}
+    <div role="presentation" className="grid">
+      <header>
+        <h3 id={props.headingID}>{props.name}</h3>
+        <TagList tags={props.tags}/>
+        <p className="thumbnailDescription">{props.description}</p>
+      </header>
+      {content}
+    </div>
   </article>);
 }
 function ContentBlock(props) {
-  return (<div key={props.heading} className="contentBlock">
-    <section className={"contentSection" + (
+  return (<React.Fragment>
+    <section key={props.heading} className={"contentSection" + (
         props.visual
         ? ""
         : " fullRow")}>
       <h4>{props.heading}</h4>
       <p>{props.text}</p>
     </section>
-    {props.visual && <VisualBlock {...props.visual} className="contentVisual"/>}
-  </div>);
+    {props.visual && <VisualBlock key={props.heading + "visual"} {...props.visual} className="contentVisual"/>}
+  </React.Fragment>);
 }
 function VisualBlock(props) {
   const {
     type,
     ...newProps
   } = props;
-  console.log(newProps);
   switch (type) {
     case "image":
       return <Image {...newProps}/>
@@ -319,7 +319,7 @@ function Image(props) {
     } = props;
     return (<div {...restProps}>
       <picture >
-        {sources.map(s => (<source media={s.media} key={s.src} srcset={s.src} type={s.type}/>))}
+        {sources.map(s => (<source media={s.media} key={s.src} srcSet={s.src} type={s.type}/>))}
         <img src={defaultSrc} width={width} height={height} alt={alt}/>
       </picture>
     </div>)
@@ -332,11 +332,13 @@ function Video(props) {
     sources,
     className,
     style,
+    height,
     ...restProps
   } = props;
-  const newClassName = (className || "") + " blurBackground center";
+  const newClassName = (className || "") + " blurBackground center video";
   const newStyle = {
-    backgroundImage: "url('http://dev.scott-wilson.ca/img/ducks.jpg')"
+    // backgroundImage: "url('http://dev.scott-wilson.ca/img/ducks.jpg')",
+    height: height
   };
   return (<div {...restProps} style={newStyle} className={newClassName} role="presentation">
     <video controls="controls">
@@ -359,14 +361,21 @@ function VimeoEmbed(props) {
     style,
     ...restProps
   } = props;
-  const newClassName = (className || "") + " blurBackground center";
-  const newStyle = {
-    backgroundImage: "url('http://dev.scott-wilson.ca/img/ducks.jpg')",
-    paddingBottom: height/width*100 + "%",
-    height: "auto"
-  };
-  return (<div {...restProps} style={newStyle} className={newClassName} role="presentation">
-    <iframe src={src} title={title} width="100%" frameBorder="0" webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen" allowFullScreen="allowFullScreen"/>
+  const newClassName = (className || "") + " blurBackground center vimeoEmbed";
+  const aspectRatio = height / width;
+  // const maxHeight = window.innerHeight * 0.9;
+  // const maxWidth = window.innerWidth * 0.9;
+  // const widthFactor = width/maxWidth;
+  // const heightFactor = height/maxHeight;
+  // const factor = Math.min(widthFactor,heightFactor);
+  // const innerStyle = {
+  //      height:  height / width * 80 + "vh"
+  //   paddingBottom: aspectRatio * 100 + "%",
+  //   width: width,
+  //      style={innerStlye}
+  // }
+  return (<div {...restProps} className={newClassName} role="presentation">
+      <iframe data-preferredwidth={width} data-preferredheight={height} data-aspectratio = {aspectRatio} src={src} title={title} frameBorder="0" webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen" allowFullScreen="allowFullScreen"/>
   </div>);
 }
 function TagList(props) {

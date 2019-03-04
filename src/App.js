@@ -7,6 +7,7 @@ import {projects, navTags} from "./portfolio-content";
 import "./App.scss";
 import "./themes.scss";
 import {resize, resizeAll} from './fixedAspectRatio.js'
+const ReactMarkdown = require('react-markdown')
 
 class App extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class App extends Component {
     this.state = {
       theme: 7, //Math.floor(Math.random() * themes.length),
       dark: true,
-      hash: this.parseHash(window.location.hash)
+      hash: ""
     };
     this.themes = [];
     for (let i = 0; i < 11; i++) {
@@ -53,11 +54,12 @@ class App extends Component {
     // const scrollStyle = overlayIsActive
     //   ? " noscroll"
     //   : ""
+
     return (<div className={"App backgroundColor " + theme} role="presentation">
       <header role="banner">
         <h1>Scott Wilson</h1>
         <h2>Interaction Design Portfolio</h2>
-        <p>Hire me!</p>
+        <p className="subtitle">Hire me!</p>
         <ThemeButtons disabled={overlayIsActive} changeTheme={this.changeTheme} dark={this.state.dark} toggleDarkMode={this.toggleDarkMode}/>
       </header>
       <FilteredTileList disabled={overlayIsActive} items={projects} tags={navTags} hash={this.state.hash}/>
@@ -101,6 +103,9 @@ class App extends Component {
         }
       }
     }
+  }
+  componentDidMount() {
+    this.handleHashChange();
   }
 }
 
@@ -216,13 +221,16 @@ class ProjectTile extends Component {
     // const handleNavigation = this.props.activeOverlay
     //   ? null
     //   : updateHash;
-    const activeClass = this.props.activeOverlay
+    const className = "tile thumbnailImage " + this.props.className + (
+      this.props.activeOverlay
       ? " active"
-      : "";
+      : "");
     const tileTitle = "tile-title-" + this.props.hash;
-    return (<a href={"#" + this.props.hash} id={"tile-" + this.props.hash} aria-labelledby={tileTitle} className={"tile " + this.props.className + activeClass} {...tabIndex(this.props.disabled)} disabled={this.props.disabled}>
+    const style = {
+      backgroundImage: "url(" + this.props.thumbnail.src + ")"
+    };
+    return (<a href={"#" + this.props.hash} id={"tile-" + this.props.hash} style={style} aria-labelledby={tileTitle} className={className} {...tabIndex(this.props.disabled)} disabled={this.props.disabled}>
 
-      <ProjectThumbnail { ...this.props}/>
       <div className="backgroundColor">
         <h3 id={tileTitle}>{this.props.name}</h3>
         <TagList tags={this.props.tags}/> {this.props.description && (<p className="thumbnailDescription">{this.props.description}</p>)}
@@ -230,12 +238,12 @@ class ProjectTile extends Component {
     </a>);
   }
 }
-class ProjectThumbnail extends Component {
-  render() {
-    const imageSrc = "http://dev.scott-wilson.ca/img/thumb/" + this.props.thumbnail.src;
-    return (<Image {...this.props.thumbnail} src={imageSrc} width={320} height={320} className={this.props.className + " thumbnailImage"}/>);
-  }
-}
+// class ProjectThumbnail extends Component {
+//   render() {
+//      const imageSrc = "http://dev.scott-wilson.ca/img/thumb/" + ;
+//     return (<Image {...this.props.thumbnail} src={imageSrc} width={320} height={320} className={this.props.className + " thumbnailImage"}/>);
+//   }
+// }
 function tabIndex(disabled) {
   return {
     tabIndex: disabled
@@ -278,17 +286,26 @@ function ProjectPage(props) {
         <p className="thumbnailDescription">{props.description}</p>
       </header>
       {content}
+      <div role="presentation" className="endOfPage backgroundColor"/>
     </div>
   </article>);
 }
 function ContentBlock(props) {
+  const heading = props.heading
+    ? <h4>{props.heading}</h4>
+    : null;
   return (<React.Fragment>
     <section key={props.heading} className={"contentSection" + (
         props.visual
         ? ""
         : " fullRow")}>
-      <h4>{props.heading}</h4>
-      <p>{props.text}</p>
+      {heading}
+      {
+        props.type === "md"
+          ? <ReactMarkdown source={props.text}/>
+          : <p>{props.text}</p>
+      }
+
     </section>
     {props.visual && <VisualBlock key={props.heading + "visual"} {...props.visual} className="contentVisual"/>}
   </React.Fragment>);
@@ -317,54 +334,69 @@ function Image(props) {
       width,
       height,
       alt,
+      caption,
       defaultSrc,
       ...restProps
     } = props;
-    return (<div {...restProps}>
+    const figcaption = caption
+      ? <figcaption>{caption}</figcaption>
+      : null;
+    return (<figure {...restProps}>
       <picture >
         {sources.map(s => (<source media={s.media} key={s.src} srcSet={s.src} type={s.type}/>))}
         <img src={defaultSrc} width={width} height={height} alt={alt}/>
       </picture>
-    </div>)
+      {figcaption}
+    </figure>)
   } else {
     return (<img {...props}/>);
   }
 }
 function Video({
   sources,
-  className,
+  caption,
   width,
   fallBack,
   height,
   ...props
 }) {
-  const newClassName = (className || "") + (
-  fallBack? " blurBackground center":"");
-  const fallBackImage = fallBack ? {
-    backgroundImage: "url(" + fallBack + ")"
-  }:null;
+  const blurBackground = (
+    fallBack
+    ? "blurBackground center"
+    : "");
+  const fallBackImage = fallBack
+    ? {
+      backgroundImage: "url(" + fallBack + ")"
+    }
+    : null;
   const aspectRatio = height / width;
   const fixedAspectChild = React.createRef();
+  const figcaption = caption
+    ? <figcaption>{caption}</figcaption>
+    : null;
   setTimeout(() => {
     resize(fixedAspectChild.current)
   }, 500);
-  return (<div {...props} className={newClassName} style={fallBackImage} role="presentation">
-    <video ref={fixedAspectChild} controls="controls" data-preferredwidth={width} data-preferredheight={height} data-aspectratio={aspectRatio}>
-      {
-        Array.isArray(sources)
-          ? sources.map(s => (<source key={s.src} src={s.src} type={s.type}/>))
-          : (<source src={sources.src} type={sources.type}/>)
-      }
-      Your browser does not support the video tag.
-    </video>
-  </div>);
+  return (<figure {...props}>
+    <div className={blurBackground} style={fallBackImage} role="presentation">
+      <video ref={fixedAspectChild} controls="controls" data-preferredwidth={width} data-preferredheight={height} data-aspectratio={aspectRatio}>
+        {
+          Array.isArray(sources)
+            ? sources.map(s => (<source key={s.src} src={s.src} type={s.type}/>))
+            : (<source src={sources.src} type={sources.type}/>)
+        }
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    {figcaption}
+  </figure>);
 }
 function VimeoEmbed({
   src,
   title,
   width,
   height,
-  className,
+  caption,
   fallBack,
   ...props
 }) {
@@ -372,16 +404,38 @@ function VimeoEmbed({
   setTimeout(() => {
     resize(fixedAspectChild.current)
   }, 500);
-  const newClassName = (className || "") + (
-  fallBack ? " blurBackground center":"");
-  const fallBackImage = fallBack ? {
-    backgroundImage: "url(" + fallBack + ")"
-  }:null;
+  const blurBackground = (
+    fallBack
+    ? " blurBackground center"
+    : "");
+  const fallBackImage = fallBack
+    ? {
+      backgroundImage: "url(" + fallBack + ")"
+    }
+    : null;
+  const figcaption = caption
+    ? <figcaption>{caption}</figcaption>
+    : null;
   const aspectRatio = height / width;
-  return (<div {...props} className={newClassName} style={fallBackImage} role="presentation">
-    <iframe ref={fixedAspectChild} data-preferredwidth={width} data-preferredheight={height} data-aspectratio={aspectRatio} src={src} title={title} frameBorder="0" webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen" allowFullScreen="allowFullScreen"/>
-  </div>);
+  const iframeProps = {
+    ref: fixedAspectChild,
+    'data-preferredwidth': width,
+    'data-preferredheight': height,
+    'data-aspectratio': aspectRatio,
+    src: src,
+    title: title,
+    frameBorder: "0",
+    webkitallowfullscreen: "webkitallowfullscreen",
+    mozallowfullscreen: "mozallowfullscreen",
+    allowFullScreen: "allowFullScreen"
+  }
+  return (<figure {...props} role="presentation">
+    <div className={blurBackground} style={fallBackImage} role="presentation">
+      <iframe {...iframeProps}/>
+    </div>
+    {figcaption}
 
+  </figure>);
 }
 function TagList(props) {
   return (<ul className="tagList">{props.tags.map(tag => <li key={tag}>{tag + " "}</li>)}</ul>);

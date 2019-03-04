@@ -6,16 +6,53 @@ export const projects = [{
     hash: "puzzle-box",
     thumbnail: {
       type: "image",
-      src: "puzzle-box.png",
+      src: "http://dev.scott-wilson.ca/img/thumb/puzzle-box.png",
       width: 320,
       height: 320,
       alt: "A render of the puzzle sphere."
     },
     content: [{
-      heading: "Heading 1",
-      text: "I designed, modeled, and fabricated a 3D printed puzzle box with mechanical puzzles embedded into a transforming geometrical form. This was my final thesis project for the Bachelor of Interaction Design program at Sheridan. The end result was a 3D printed mechanical puzzle sphere (only loosely called a puzzle box), with twelve uniquely solvable rotating ring puzzles embedded on the faces of a dodecahedron. The project acted as an exploration of studio practice, digital fabrication, puzzle design, play-testing, and algorithmic generation. The driving force behind it was my personal passion for puzzles and fascination with mixing the digital with the physical. The process started in two intertwined areas: puzzles and geometry. In order to create something that mixed digital and physical, I had to discover a physical form that worked well with a particular type of puzzle, and vice-versa. From there it went through testing, iteration, reiteration, retesting, more reiteration and testing, and finally fabrication. Over the course of the project I encountered a ton of challenges and a handful of eureka moments that I’m going to go over here.",
+      heading: "Heading 0",
+      text: `
+Over the course of the project I’ve been responsible for a number of things. It was a small core team, so we’ve all had to take on multiple roles and stretch our comfort zones. I’ve gathered together some highlights to give an idea of my contributions and strengths across:
+- Design
+- Procedural Geometry
+- Fabrication
+- Projection Mapping
+`,
       visual: {
         type: "image",
+        caption:"A render of the puzzle sphere.",
+        sources: [{
+          src: 'http://dev.scott-wilson.ca/img/thumb/puzzle-box.png',
+          type: "image/png",
+          media: "(min-width: 1024px)"
+        },{
+          src: 'http://dev.scott-wilson.ca/img/puzzle-box-vertical.png',
+          type: "image/png",
+          media: "(orientation: portrait)"
+        },{
+          src: 'http://dev.scott-wilson.ca/img/puzzle-box-square.png',
+          type: "image/png",
+          media: "(min-width: 200px)"
+        }],
+          defaultSrc: 'http://dev.scott-wilson.ca/img/puzzle-box-square.png',
+        // width: 600,
+        // height: 360,
+        alt: "A render of the puzzle sphere."
+      }
+    },{
+      heading: "Heading 1",
+      type:"md",
+      text: `Over the course of the project I’ve been responsible for a number of things. It was a small core team, so we’ve all had to take on multiple roles and stretch our comfort zones. I’ve gathered together some highlights to give an idea of my contributions and strengths across:
+- Design
+- Procedural Geometry
+- Fabrication
+- Projection Mapping
+`,
+      visual: {
+        type: "image",
+        caption:"A render of the puzzle sphere.",
         sources: [{
           src: 'http://dev.scott-wilson.ca/img/thumb/puzzle-box.png',
           type: "image/png",
@@ -39,6 +76,7 @@ export const projects = [{
       text: "I started by looking at puzzles I personally loved. I drew inspiration from one puzzle in particular, called Slitherlink, created by Nikoli who also created Sudoku. I used paper prototypes and recruited a variety of players to test out possible puzzle types. Some players came back to help test multiple iterations, and others were new to the project, only trying a single version. The main things I was looking for in a puzzle was that the rules can be learned without guidance or supervision, and that I could conceive of a way to make the puzzle in physical form. After creating and testing several different puzzle types, I landed on a rotating rings puzzle that worked well with the physical forms I was considering. This type of puzzle had a number of benefits:",
       visual: {
         type: "vimeo",
+        caption:"A render of the puzzle sphere.",
         src: 'https://player.vimeo.com/video/266817920?loop=1',//wide
         width: 640,
         height: 360,
@@ -53,6 +91,7 @@ export const projects = [{
       text: "I started by looking at puzzles I personally loved. I drew inspiration from one puzzle in particular, called Slitherlink, created by Nikoli who also created Sudoku. I used paper prototypes and recruited a variety of players to test out possible puzzle types. Some players came back to help test multiple iterations, and others were new to the project, only trying a single version. The main things I was looking for in a puzzle was that the rules can be learned without guidance or supervision, and that I could conceive of a way to make the puzzle in physical form. After creating and testing several different puzzle types, I landed on a rotating rings puzzle that worked well with the physical forms I was considering. This type of puzzle had a number of benefits:",
       visual: {
         type: "vimeo",
+        caption:"A render of the puzzle sphere.",
         // src: 'https://player.vimeo.com/video/266817920?loop=1',//wide
         // width: 640,
         // height: 360,
@@ -67,6 +106,7 @@ export const projects = [{
       text: "I started by looking at puzzles I personally loved. I drew inspiration from one puzzle in particular, called Slitherlink, created by Nikoli who also created Sudoku. I used paper prototypes and recruited a variety of players to test out possible puzzle types. Some players came back to help test multiple iterations, and others were new to the project, only trying a single version. The main things I was looking for in a puzzle was that the rules can be learned without guidance or supervision, and that I could conceive of a way to make the puzzle in physical form. After creating and testing several different puzzle types, I landed on a rotating rings puzzle that worked well with the physical forms I was considering. This type of puzzle had a number of benefits:",
       visual: {
         type: "video",
+        caption:"A render of the puzzle sphere.",
         sources: [{
           src: 'http://dev.scott-wilson.ca/vid/scott-wilson-puzzle-cube-interaction.mp4',
           type: "video/mp4"
@@ -84,7 +124,7 @@ export const projects = [{
     hash: "w-i-p",
     thumbnail: {
       type: "image",
-      src: "w-i-p.jpg",
+      src: "http://dev.scott-wilson.ca/img/thumb/w-i-p.jpg",
       width: 320,
       height: 320,
       alt: "A render of the puzzle sphere."
@@ -97,7 +137,7 @@ export const projects = [{
     hash: "escape-from-the-tower",
     thumbnail: {
       type: "image",
-      src: "escape-from-the-tower.jpg",
+      src: "http://dev.scott-wilson.ca/img/thumb/escape-from-the-tower.jpg",
       width: 320,
       height: 320,
       alt: "A render of the puzzle sphere."
@@ -110,7 +150,7 @@ export const projects = [{
     hash: "he-for-she",
     thumbnail: {
       type: "image",
-      src: "he-for-she.png",
+      src: "http://dev.scott-wilson.ca/img/thumb/he-for-she.png",
       width: 320,
       height: 320,
       alt: "A render of the puzzle sphere."
@@ -123,7 +163,7 @@ export const projects = [{
     hash: "canadian-youth",
     thumbnail: {
       type: "image",
-      src: "canadian-youth.jpg",
+      src: "http://dev.scott-wilson.ca/img/thumb/canadian-youth.jpg",
       width: 320,
       height: 320,
       alt: "A render of the puzzle sphere."
@@ -136,7 +176,7 @@ export const projects = [{
     hash: "toronto-fringe-festival",
     thumbnail: {
       type: "image",
-      src: "toronto-fringe-festival.png",
+      src: "http://dev.scott-wilson.ca/img/thumb/toronto-fringe-festival.png",
       width: 320,
       height: 320,
       alt: "A render of the puzzle sphere."
@@ -149,7 +189,7 @@ export const projects = [{
     hash: "slate",
     thumbnail: {
       type: "image",
-      src: "slate.png",
+      src: "http://dev.scott-wilson.ca/img/thumb/slate.png",
       width: 320,
       height: 320,
       alt: "A render of the puzzle sphere."

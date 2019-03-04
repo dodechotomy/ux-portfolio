@@ -33,6 +33,10 @@ button {
   cursor: pointer;
 }
 
+figcaption {
+  font-style: italic;
+}
+
 #root {
   overflow-y: auto;
   height: 100%;
@@ -67,6 +71,26 @@ button {
     }
   }
 
+  h1 {
+    font-weight: 400;
+    font-size: 3em;
+  }
+
+  h2 {
+    font-weight: 300;
+    font-size: 1.5em;
+  }
+
+  .subtitle,
+  h2 {
+    overflow: hidden;
+    transition: max-height $easing;
+    max-height: 2em;
+    @include media("<tablet") {
+      max-height: 0;
+    }
+  }
+
   p {
     max-width: 40em;
     line-height: normal;
@@ -75,7 +99,7 @@ button {
   header {
     // text-align: left;
     // margin-bottom: 1.5rem;
-    z-index: 3;
+    // z-index: 3;
     padding-bottom: 1rem;
   }
 
@@ -84,10 +108,24 @@ button {
   header {
     padding-left: 1rem;
   }
+    .filterButtons {
+      margin-bottom: 1rem;}
+  @include media("<706px") {
+    .filterButtons {
+      margin-bottom: 0;
+      min-height: 2.25rem;
+      padding-left: 0;
+      width: 100%;
+      display: grid;
+      grid-gap: 0.25em;
+      grid-template-columns: repeat(3, 1fr);
 
-  .filterButtons {
-    margin-bottom: 1rem;
-    min-height: 2.25rem;
+      button.horizontal {
+        flex-grow: 1;
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
   }
 
   button {
@@ -102,6 +140,21 @@ button {
 
     &.vertical {
       margin-bottom: 1rem;
+    }
+  }
+  @include media("<706px") {
+    padding-top: 0;
+    padding-left: 0;
+
+    header {
+      padding-left: 0;
+      padding-bottom: 0;
+
+      h1 {
+        font-size: 3em;
+        padding-bottom: 0.125rem;
+        padding-left: 0.125rem;
+      }
     }
   }
 
@@ -131,7 +184,7 @@ button {
 
   .tileList {
     display: grid;
-    grid-gap: 1rem 1rem;
+    grid-gap: 16px 16px;
     grid-template-columns: repeat(auto-fill, 320px);
     max-width: 70rem;
     height: auto;
@@ -140,16 +193,15 @@ button {
     justify-content: left;
     padding-bottom: 1rem;
     padding-right: 1rem;
-    @include media("<tablet") {
-      width: 100vw;
+    @include media("<706px") {
+      width: 100%;
       padding: 0;
-      grid-template-columns: repeat(auto-fill, 100vw);
+      grid-template-columns: repeat(auto-fill, 100%);
       grid-gap: 1rem 0;
 
       .tile {
-        width: 100vw;
-        height: 100vw;
-
+        width: 100%;
+        // height: 50vw;
         .thumbnailImage {
           width: 100%;
           height: 100%;
@@ -160,10 +212,10 @@ button {
 
   .tile {
     opacity: 1;
-    width: 320px;
-    height: 320px;
+    width: 20em;
+    // height: 320px;
     max-width: 100vw;
-    max-height: 100vw;
+    max-height: 100vh;
     padding: 10rem 0.75rem 0.75rem;
     // margin: 0.5em;
     position: relative;
@@ -171,19 +223,30 @@ button {
     text-decoration: none;
     transition: opacity $easing;
 
-    .thumbnailImage {
-      background: {
-        position: center;
-        image: url("http://dev.scott-wilson.ca/img/ducks.jpg");
-        size: cover;
+    h3 {
+      font-size: 1.5em;
+    }
+
+    &.thumbnailImage {
+      background-size: 0;
+
+      &::before {
+        content: '';
+        background: {
+          position: center;
+          image: inherit;
+          size: cover;
+        }
+        // filter: grayscale(80%) contrast(110%);
+        // width: 100%;
+        // height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transition: transform $easing;
       }
-      // filter: grayscale(80%) contrast(110%);
-      // width: 100%;
-      // height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      transition: transform $easing;
     }
 
     &.inactive {
@@ -194,7 +257,7 @@ button {
     &:hover {
       opacity: 1;
 
-      .thumbnailImage {
+      &.thumbnailImage::before {
         transform: scale(1.02);
         // filter: none;
       }
@@ -215,7 +278,7 @@ button {
       flex-flow: column nowrap;
       justify-content: flex-start;
       width: 100%;
-      height: 100%;
+      min-height: 100%;
       padding: 0.5rem;
       z-index: 2;
       position: relative;
@@ -290,16 +353,34 @@ button {
     left: $tablet-bar-width;
     width: calc(100vw - #{$tablet-bar-width});
     height: 100vh;
-    padding: 1em;
+    min-height: 100%;
+    padding: 1em 1em 2em;
     overflow: auto;
+
+    h3 {
+      // margin-bottom: 1em;
+      font-size: 3em;
+    }
+
+    h4 {
+      // margin-bottom: 1em;
+      font-size: 2em;
+    }
 
     .grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       max-width: 68em;
       width: 100%;
+      min-height: 100%;
+      padding-bottom: 2em;
+      position: relative;
       height: auto;
       grid-gap: 2em 1em;
+      // padding-bottom: 1em;
+      @include media(">=desktop") {
+        padding-bottom: 4em;
+      }
       @include media("<desktop") {
         grid-gap: 0.5em;
       }
@@ -310,46 +391,40 @@ button {
       padding: 0;
       grid-column-start: span 5;
     }
-    // @include media("<tablet") {
-    //   .contentVisual {
-    //     width: 80vw !important;
-    //     height: 80vh !important;
-    //   }
-    // }
-    h4 {
-      margin-bottom: 0.5em;
-    }
-
-    .contentSection,
-    .contentVisual {
-      // padding: 0;
-      outline: 1px rgba(255,255,255,0.125) solid;
-      // outline-offset: 0.25em;
-    }
 
     .contentSection {
       grid-column: 1/ 4;
+
+      p {
+        margin: 0.5em 0;
+        line-height: 1.55em;
+      }
+
+      ul {
+        li {
+          list-style-type: square;
+          margin: 0.5em 1.5em;
+          line-height: 1.35em;
+        }
+      }
     }
 
     .contentVisual {
       max-width: 100%;
       max-height: 90vh;
       grid-column: 4/ 6;
-      position: relative;
       z-index: 1;
-      // max-height: 50vh;
-      picture {
-        // width: 100%;
-        // height: 100%;
-        // max-width: 80vw;
-        // max-height: 80vh;
-        img {
-          max-width: 100%;
-          max-height: 100%;
-          // width: auto;
-          // height: auto;
-        }
+
+      img {
+        max-width: 100%;
+        max-height: 100%;
       }
+    }
+
+    .contentVisual .center {
+      position: relative;
+      width: 100%;
+      height: 100%;
     }
     @include media(">=desktop") {
       .contentSection:nth-of-type(even) {
@@ -362,7 +437,7 @@ button {
       }
 
       .contentVisual {
-        &.center {
+        .center {
           display: flex;
           flex-flow: row;
           justify-content: center;
@@ -375,10 +450,8 @@ button {
           }
         }
 
-        &.blurBackground {
+        .blurBackground {
           overflow: hidden;
-          // max-width: 100vw;
-          // max-height: 100vh;
           background: none;
 
           &::before {
@@ -389,7 +462,7 @@ button {
             transform: translate(-50%,-50%);
             width: 200%;
             height: 200%;
-            z-index: -1;
+            // z-index: -1;
             filter: blur(6px) saturate(0.25);
             background: {
               position: center;
@@ -410,10 +483,6 @@ button {
       }
     }
     @include media("<desktop") {
-      .grid {
-        padding-bottom: 1em;
-      }
-
       .contentSection,
       .contentVisual {
         grid-column: span 5;
@@ -421,7 +490,12 @@ button {
 
       .contentVisual {
         max-width: 100vw;
-        max-height: 95vh;
+        max-height: none;
+        height: auto;
+
+        .center {
+          height: auto;
+        }
 
         iframe,
         video {
@@ -430,7 +504,7 @@ button {
           transform: none;
         }
 
-        &.blurBackground {
+        .blurBackground {
           background: none !important;
         }
       }
@@ -449,51 +523,81 @@ button {
       width: 100vw;
       height: calc(100vh - #{$phone-bar-height});
       padding: 0.5em 0 0;
+      min-height: calc(100vh - #{$phone-bar-height});
 
       .contentSection,
+      figcaption,
       header {
         padding: 1em 0.5em 0.5em;
       }
 
       .contentVisual {
         max-width: 100vw;
-        max-height: calc(99vh - #{$phone-bar-height});
+        height: auto;
+        // max-height: calc(99vh - #{$phone-bar-height});
+        .center {
+          height: auto;
+        }
 
         iframe,
+        img,
         video {
           max-height: calc(99vh - #{$phone-bar-height});
+          position: relative;
+          transform: translate(-50%,0);
+          margin: auto;
+          left: 50%;
         }
-        // .contentSection:not(:first-of-type){
-        // }
+
+        figcaption {
+          text-align: center;
+        }
       }
     }
 
     .fullRow {
       grid-column: span 5 !important;
     }
-    // @include media("<desktop") {
-    //   .contentSection,
-    //   .contentVisual {
-    //     margin: 1em 0;
-    //     width: auto;
-    //     max-height: 100%;
-    //   }
-    // }
-    // @include media("<tablet") {
-    //
-    //   .contentSection {
-    //     padding: 0 0.5em;
-    //   }
-    //
-    //   .contentVisual {
-    //     padding: 0;
-    //     max-height: calc(100vh - #{$phone-bar-height});
-    //   }
-    // }
+
+    .endOfPage {
+      text-align: center;
+      padding: 1em 10vw;
+      height: 0;
+      text-align: center;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      max-width: 100%;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 80vw;
+        max-width: 100%;
+        // padding: 0 5vw;
+        height: 0;
+        transform: translate(-50%,-50%);
+        border-bottom: 1px solid;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        border: 1px solid;
+        width: 0.5em;
+        height: 0.5em;
+        transform: translate(-50%,-50%);
+        background-color: inherit;
+      }
+    }
   }
-  // }
+
   .placeholder_message {
-    // font-style: italic;
     font-weight: 300;
   }
 
@@ -529,6 +633,22 @@ button {
       button.selected::after {
         border-bottom: $button-selection-border;
         border-left: none !important;
+      }
+    }
+    @include media("<500px") {
+      opacity: 0;
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;
+      display: flex;
+      flex-flow: row;
+      align-items: stretch;
+      height: 2em;
+
+      & > button {
+        flex-grow: 1;
+        height: 100%;
       }
     }
   }

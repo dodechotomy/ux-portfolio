@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
+import $ from 'jquery'
 import {projects, navTags} from "./portfolio-content";
+// import "node_modules/include-media-export/dist/include-media-1.0.2.min.js"
+// import "include-media-export"
+import im from "../node_modules/include-media-export/include-media.js"
 import "./App.scss";
 import "./themes.scss";
-import resizeVideos from './videoResize.js'
-
+import {resize, resizeAll} from './fixedAspectRatio.js'
 
 class App extends Component {
   constructor(props) {
@@ -23,7 +26,7 @@ class App extends Component {
     this.handleHashChange = this.handleHashChange.bind(this);
     window.addEventListener("hashchange", this.handleHashChange, false);
     window.addEventListener("keydown", this.handleKeyDown, false);
-    resizeVideos();
+    $(window).resize(resizeAll);
   }
 
   parseHash(hash) {
@@ -98,6 +101,11 @@ class App extends Component {
         }
       }
     }
+  }
+
+  componentDidMount() {
+    console.log("body mount");
+    // setTimeout(() => $(window).resize(), 500); awful  HACK:
   }
 }
 
@@ -327,21 +335,21 @@ function Image(props) {
     return (<img {...props}/>);
   }
 }
-function Video(props) {
-  const {
-    sources,
-    className,
-    style,
-    height,
-    ...restProps
-  } = props;
+function Video({
+  sources,
+  className,
+  width,
+  height,
+  ...props
+}) {
   const newClassName = (className || "") + " blurBackground center video";
-  const newStyle = {
-    // backgroundImage: "url('http://dev.scott-wilson.ca/img/ducks.jpg')",
-    height: height
-  };
-  return (<div {...restProps} style={newStyle} className={newClassName} role="presentation">
-    <video controls="controls">
+  const aspectRatio = height / width;
+  const fixedAspectChild = React.createRef();
+  setTimeout(() => {
+    resize(fixedAspectChild.current)
+  }, 500);
+  return (<div {...props} className={newClassName} role="presentation">
+    <video  ref={fixedAspectChild} controls="controls" data-preferredwidth={width} data-preferredheight={height} data-aspectratio={aspectRatio}>
       {
         Array.isArray(sources)
           ? sources.map(s => (<source key={s.src} src={s.src} type={s.type}/>))
@@ -351,32 +359,24 @@ function Video(props) {
     </video>
   </div>);
 }
-function VimeoEmbed(props) {
-  const {
-    src,
-    title,
-    width,
-    height,
-    className,
-    style,
-    ...restProps
-  } = props;
+function VimeoEmbed({
+  src,
+  title,
+  width,
+  height,
+  className,
+  ...props
+}) {
+  const fixedAspectChild = React.createRef();
+  setTimeout(() => {
+    resize(fixedAspectChild.current)
+  }, 500);
   const newClassName = (className || "") + " blurBackground center vimeoEmbed";
   const aspectRatio = height / width;
-  // const maxHeight = window.innerHeight * 0.9;
-  // const maxWidth = window.innerWidth * 0.9;
-  // const widthFactor = width/maxWidth;
-  // const heightFactor = height/maxHeight;
-  // const factor = Math.min(widthFactor,heightFactor);
-  // const innerStyle = {
-  //      height:  height / width * 80 + "vh"
-  //   paddingBottom: aspectRatio * 100 + "%",
-  //   width: width,
-  //      style={innerStlye}
-  // }
-  return (<div {...restProps} className={newClassName} role="presentation">
-      <iframe data-preferredwidth={width} data-preferredheight={height} data-aspectratio = {aspectRatio} src={src} title={title} frameBorder="0" webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen" allowFullScreen="allowFullScreen"/>
+  return (<div id="uniqueID" {...props} className={newClassName} role="presentation">
+    <iframe ref={fixedAspectChild} data-preferredwidth={width} data-preferredheight={height} data-aspectratio={aspectRatio} src={src} title={title} frameBorder="0" webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen" allowFullScreen="allowFullScreen"/>
   </div>);
+
 }
 function TagList(props) {
   return (<ul className="tagList">{props.tags.map(tag => <li key={tag}>{tag + " "}</li>)}</ul>);

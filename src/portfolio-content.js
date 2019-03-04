@@ -45,7 +45,7 @@ export const projects = [{
         // src: 'https://player.vimeo.com/video/266867847?loop=1',//tall
         // width: 640,
         // height: 1382,
-        title: "Geometric Puzzle Sphere - Interaction"
+        title: "Geometric Puzzle Sphere - Interaction",
       }
     },{
       heading: "Heading 3",

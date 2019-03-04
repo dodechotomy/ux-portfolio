@@ -1,4 +1,5 @@
 @import "../node_modules/include-media/dist/include-media";
+@import '../node_modules/include-media-export/dist/_include-media-export';
 $easing: 0.15s ease-in-out;
 $easing-slow: 0.3s ease-in-out;
 $easing-very-slow: 3s ease-in-out;
@@ -304,20 +305,14 @@ button {
 
     header {
       padding: 0;
-
       grid-column-start: span 5;
     }
-    @include media("<tablet") {
-      top: $phone-bar-height;
-      left: 0;
-      width: 100vw;
-      height: calc(100vh - #{$phone-bar-height});
-      padding: 0.5em 0 0;
-
-      header {
-        padding: 0 0.5em;
-      }
-    }
+    // @include media("<tablet") {
+    //   .contentVisual {
+    //     width: 80vw !important;
+    //     height: 80vh !important;
+    //   }
+    // }
 
     h4 {
       margin-bottom: 0.5em;
@@ -335,6 +330,8 @@ button {
     }
 
     .contentVisual {
+      max-width: 100%;
+      max-height: 90vh;
       grid-column: 4/ 6;
       position: relative;
       z-index: 1;
@@ -351,26 +348,16 @@ button {
           // height: auto;
         }
       }
-
-      &.video,
-      &.vimeoEmbed {
-        width: 100%;
-        max-height: 90vh;
-        // background-image: url("http://dev.scott-wilson.ca/img/ducks.jpg");
-      }
-      .fixedAspect{
+      // &.video,
+      // &.vimeoEmbed {
+      //   width: 100%;
+      //   max-height: 90vh;
+      //   // background-image: url("http://dev.scott-wilson.ca/img/ducks.jpg");
+      // }
+      .fixedAspect {
         position: relative;
-        
       }
-      iframe,
-      video {
-        max-width: 80vw;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-      }
+
 
       &.center {
         display: flex;
@@ -411,33 +398,64 @@ button {
       .contentVisual:nth-of-type(even) {
         grid-column: 1 / 3;
       }
+
+            iframe,
+            video {
+              // width: 100%;
+              // height: 100%;
+              position: absolute;
+              top: 0;
+              left: 0;
+            }
     }
     @include media("<desktop") {
-      .contentBlock {
-        padding: 1em;
-      }
-
       .contentSection,
       .contentVisual {
-        margin: 1em 0;
-        width: auto;
-        max-height: 100%;
+        grid-column: span 5;
+      }
+
+      .contentVisual {
+        height: auto;
       }
     }
     @include media("<tablet") {
-      .contentBlock {
-        padding: 0;
-      }
+      top: $phone-bar-height;
+      left: 0;
+      width: 100vw;
+      height: calc(100vh - #{$phone-bar-height});
+      padding: 0.5em 0 0;
 
-      .contentSection {
-        padding: 0 0.5em;
+      .contentSection,
+      header {
+        padding: 1em 0.5em 0.5em;
       }
 
       .contentVisual {
-        padding: 0;
+        max-width: 100vw;
         max-height: calc(100vh - #{$phone-bar-height});
       }
+      // .contentSection:not(:first-of-type){
+      // }
     }
+    // @include media("<desktop") {
+    //   .contentSection,
+    //   .contentVisual {
+    //     margin: 1em 0;
+    //     width: auto;
+    //     max-height: 100%;
+    //   }
+    // }
+    // @include media("<tablet") {
+    //
+    //   .contentSection {
+    //     padding: 0 0.5em;
+    //   }
+    //
+    //   .contentVisual {
+    //     padding: 0;
+    //     max-height: calc(100vh - #{$phone-bar-height});
+    //   }
+    // }
   }
   // }
   .placeholder_message {

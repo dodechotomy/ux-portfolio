@@ -46,6 +46,7 @@ export const projects = [{
         // width: 640,
         // height: 1382,
         title: "Geometric Puzzle Sphere - Interaction",
+        fallBack: "http://dev.scott-wilson.ca/img/ducks.jpg"
       }
     },{
       heading: "Heading 3",
@@ -58,7 +59,8 @@ export const projects = [{
         src: 'https://player.vimeo.com/video/266867847?loop=1',//tall
         width: 640,
         height: 1138,
-        title: "Geometric Puzzle Sphere - Interaction"
+        title: "Geometric Puzzle Sphere - Interaction",
+        fallBack: "http://dev.scott-wilson.ca/img/ducks.jpg"
       }
     }, {
       heading: "Heading 4",
@@ -70,7 +72,8 @@ export const projects = [{
           type: "video/mp4"
         }],
         width: 720,
-        height: 1280
+        height: 1280,
+        fallBack: "http://dev.scott-wilson.ca/img/ducks.jpg"
       }
     }]
   },

@@ -11,7 +11,10 @@ function resizeAll() {
 };
 
 function resize(el) {
-  console.log(el);
+  if (!el) {
+    // console.warn("tried to resize an invalid element");
+    return;
+  }
   let fluidEl = el.parentNode;
   // debugger;
   let parentWidth = fluidEl.clientWidth;
@@ -23,23 +26,18 @@ function resize(el) {
   let width = Math.min(preferredWidth, parentWidth);
   let height = Math.min(width * aspectRatio, preferredHeight);
   const constrainHeight = !im.lessThan('desktop');
-    el.dataset['constrainheight'] = constrainHeight;
-  if (constrainHeight){//el.dataset['constrainheight']) {
+  el.dataset['constrainheight'] = constrainHeight;
+  if (constrainHeight) { //el.dataset['constrainheight']) {
     height = Math.min(height, parentHeight);
   } else {
     height = Math.min(height, window.innerHeight);
   }
   width = height / aspectRatio;
-  if(width > parentWidth){
+  if (width > parentWidth) {
     debugger;
   }
-
-  console.log("width", width);
-  console.log("height", height);
   el.style.width = width + "px";
   el.style.height = height + "px";
-    console.log("el.style.width", el.style.width);
-    console.log("el.style.height", el.style.height);
 };
 export {
   resize,

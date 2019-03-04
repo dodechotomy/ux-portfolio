@@ -3,7 +3,7 @@ import $ from 'jquery'
 import {projects, navTags} from "./portfolio-content";
 // import "node_modules/include-media-export/dist/include-media-1.0.2.min.js"
 // import "include-media-export"
-import im from "../node_modules/include-media-export/include-media.js"
+// import im from "../node_modules/include-media-export/include-media.js"
 import "./App.scss";
 import "./themes.scss";
 import {resize, resizeAll} from './fixedAspectRatio.js'
@@ -101,11 +101,6 @@ class App extends Component {
         }
       }
     }
-  }
-
-  componentDidMount() {
-    console.log("body mount");
-    // setTimeout(() => $(window).resize(), 500); awful  HACK:
   }
 }
 
@@ -339,17 +334,22 @@ function Video({
   sources,
   className,
   width,
+  fallBack,
   height,
   ...props
 }) {
-  const newClassName = (className || "") + " blurBackground center video";
+  const newClassName = (className || "") + (
+  fallBack? " blurBackground center":"");
+  const fallBackImage = fallBack ? {
+    backgroundImage: "url(" + fallBack + ")"
+  }:null;
   const aspectRatio = height / width;
   const fixedAspectChild = React.createRef();
   setTimeout(() => {
     resize(fixedAspectChild.current)
   }, 500);
-  return (<div {...props} className={newClassName} role="presentation">
-    <video  ref={fixedAspectChild} controls="controls" data-preferredwidth={width} data-preferredheight={height} data-aspectratio={aspectRatio}>
+  return (<div {...props} className={newClassName} style={fallBackImage} role="presentation">
+    <video ref={fixedAspectChild} controls="controls" data-preferredwidth={width} data-preferredheight={height} data-aspectratio={aspectRatio}>
       {
         Array.isArray(sources)
           ? sources.map(s => (<source key={s.src} src={s.src} type={s.type}/>))
@@ -365,15 +365,20 @@ function VimeoEmbed({
   width,
   height,
   className,
+  fallBack,
   ...props
 }) {
   const fixedAspectChild = React.createRef();
   setTimeout(() => {
     resize(fixedAspectChild.current)
   }, 500);
-  const newClassName = (className || "") + " blurBackground center vimeoEmbed";
+  const newClassName = (className || "") + (
+  fallBack ? " blurBackground center":"");
+  const fallBackImage = fallBack ? {
+    backgroundImage: "url(" + fallBack + ")"
+  }:null;
   const aspectRatio = height / width;
-  return (<div id="uniqueID" {...props} className={newClassName} role="presentation">
+  return (<div {...props} className={newClassName} style={fallBackImage} role="presentation">
     <iframe ref={fixedAspectChild} data-preferredwidth={width} data-preferredheight={height} data-aspectratio={aspectRatio} src={src} title={title} frameBorder="0" webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen" allowFullScreen="allowFullScreen"/>
   </div>);
 

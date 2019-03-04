@@ -299,7 +299,10 @@ button {
       max-width: 68em;
       width: 100%;
       height: auto;
-      grid-gap: 1em 0.5em;
+      grid-gap: 2em 1em;
+      @include media("<desktop") {
+        grid-gap: 0.5em;
+      }
       grid-auto-flow: row dense;
     }
 
@@ -313,7 +316,6 @@ button {
     //     height: 80vh !important;
     //   }
     // }
-
     h4 {
       margin-bottom: 0.5em;
     }
@@ -348,47 +350,6 @@ button {
           // height: auto;
         }
       }
-      // &.video,
-      // &.vimeoEmbed {
-      //   width: 100%;
-      //   max-height: 90vh;
-      //   // background-image: url("http://dev.scott-wilson.ca/img/ducks.jpg");
-      // }
-      .fixedAspect {
-        position: relative;
-      }
-
-
-      &.center {
-        display: flex;
-        flex-flow: row;
-        justify-content: flex-start;
-        align-items: flex-start;
-      }
-    }
-
-    .blurBackground {
-      overflow: hidden;
-      // max-width: 100vw;
-      // max-height: 100vh;
-      background: none;
-
-      &::before {
-        position: absolute;
-        content: '';
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-        width: 200%;
-        height: 200%;
-        z-index: -1;
-        filter: blur(6px) saturate(0.25);
-        background: {
-          position: center;
-          image: inherit;
-          size: cover;
-        }
-      }
     }
     @include media(">=desktop") {
       .contentSection:nth-of-type(even) {
@@ -397,25 +358,89 @@ button {
 
       .contentVisual:nth-of-type(even) {
         grid-column: 1 / 3;
+        left: 0;
       }
 
-            iframe,
-            video {
-              // width: 100%;
-              // height: 100%;
-              position: absolute;
-              top: 0;
-              left: 0;
+      .contentVisual {
+        &.center {
+          display: flex;
+          flex-flow: row;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+
+          [data-constrainheight] {
+            left: 50%;
+            transform: translate(-50%);
+          }
+        }
+
+        &.blurBackground {
+          overflow: hidden;
+          // max-width: 100vw;
+          // max-height: 100vh;
+          background: none;
+
+          &::before {
+            position: absolute;
+            content: '';
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 200%;
+            height: 200%;
+            z-index: -1;
+            filter: blur(6px) saturate(0.25);
+            background: {
+              position: center;
+              image: inherit;
+              size: cover;
             }
+          }
+        }
+      }
+
+      iframe,
+      video {
+        // width: 100%;
+        // height: 100%;
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
     }
     @include media("<desktop") {
+      .grid {
+        padding-bottom: 1em;
+      }
+
       .contentSection,
       .contentVisual {
         grid-column: span 5;
       }
 
       .contentVisual {
-        height: auto;
+        max-width: 100vw;
+        max-height: 95vh;
+
+        iframe,
+        video {
+          max-height: 95vh;
+          left: 0;
+          transform: none;
+        }
+
+        &.blurBackground {
+          background: none !important;
+        }
+      }
+
+      .contentSection:not(:first-of-type) {
+        padding-top: 4em;
+      }
+
+      .contentSection:first-of-type {
+        padding-top: 1em;
       }
     }
     @include media("<tablet") {
@@ -432,10 +457,19 @@ button {
 
       .contentVisual {
         max-width: 100vw;
-        max-height: calc(100vh - #{$phone-bar-height});
+        max-height: calc(99vh - #{$phone-bar-height});
+
+        iframe,
+        video {
+          max-height: calc(99vh - #{$phone-bar-height});
+        }
+        // .contentSection:not(:first-of-type){
+        // }
       }
-      // .contentSection:not(:first-of-type){
-      // }
+    }
+
+    .fullRow {
+      grid-column: span 5 !important;
     }
     // @include media("<desktop") {
     //   .contentSection,
@@ -482,7 +516,7 @@ button {
     position: absolute;
     top: 0;
     right: 0;
-    z-index: 4;
+    z-index: 1;
     display: flex;
     flex-flow: column nowrap;
     @media speech {

@@ -12,16 +12,16 @@ const ReactMarkdown = require('react-markdown')
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      theme: 7, //Math.floor(Math.random() * themes.length),
-      dark: true,
-      hash: ""
-    };
     this.themes = [];
     for (let i = 0; i < 11; i++) {
       this.themes.push(i);
     }
 
+    this.state = {
+      theme: Math.floor(Math.random() * this.themes.length),
+      dark: true,
+      hash: ""
+    };
     this.changeTheme = this.changeTheme.bind(this);
     this.toggleDarkMode = this.toggleDarkMode.bind(this);
     this.handleHashChange = this.handleHashChange.bind(this);

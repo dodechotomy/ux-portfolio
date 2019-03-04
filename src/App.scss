@@ -6,6 +6,7 @@ $easing-very-slow: 3s ease-in-out;
 $button-selection-border: 0.25em solid;
 $phone-bar-height: 2rem;
 $tablet-bar-width: 4.5rem;
+$ios-bottom-bar: 88px;
 
 *,
 body,
@@ -16,10 +17,9 @@ html {
   transition: color $easing, background-color $easing;
 }
 
-body,
 html {
-  height: 100vh;
-  overflow: hidden;
+  // height: 100vh;
+  // overflow: hidden;
 }
 
 li {
@@ -37,9 +37,10 @@ figcaption {
   font-style: italic;
 }
 
-#root {
+#root,
+body {
   overflow-y: auto;
-  height: 100%;
+  min-height: 100%;
 }
 
 .App {
@@ -84,7 +85,7 @@ figcaption {
   .subtitle,
   h2 {
     overflow: hidden;
-    transition: max-height $easing;
+    transition-property: max-height, color, background-color;
     max-height: 2em;
     @include media("<tablet") {
       max-height: 0;
@@ -108,11 +109,13 @@ figcaption {
   header {
     padding-left: 1rem;
   }
-    .filterButtons {
-      margin-bottom: 1rem;}
+
+  .filterButtons {
+    margin-bottom: 1rem;
+  }
   @include media("<706px") {
     .filterButtons {
-      margin-bottom: 0;
+      margin-bottom: 0.5rem;
       min-height: 2.25rem;
       padding-left: 0;
       width: 100%;
@@ -193,6 +196,7 @@ figcaption {
     justify-content: left;
     padding-bottom: 1rem;
     padding-right: 1rem;
+    margin-bottom: $ios-bottom-bar;
     @include media("<706px") {
       width: 100%;
       padding: 0;
@@ -354,7 +358,7 @@ figcaption {
     width: calc(100vw - #{$tablet-bar-width});
     height: 100vh;
     min-height: 100%;
-    padding: 1em 1em 2em;
+    padding: 1em 1em calc(2em + #{$ios-bottom-bar});
     overflow: auto;
 
     h3 {
@@ -377,6 +381,7 @@ figcaption {
       position: relative;
       height: auto;
       grid-gap: 2em 1em;
+      margin-bottom: calc(2 * #{$ios-bottom-bar});
       // padding-bottom: 1em;
       @include media(">=desktop") {
         padding-bottom: 4em;
@@ -565,7 +570,7 @@ figcaption {
       height: 0;
       text-align: center;
       position: absolute;
-      bottom: 0;
+      bottom: -#{$ios-bottom-bar};
       left: 0;
       width: 100%;
       max-width: 100%;
@@ -575,8 +580,8 @@ figcaption {
         position: absolute;
         top: 50%;
         left: 50%;
-        width: 80vw;
-        max-width: 100%;
+        width: 3em;
+        // max-width: 100%;
         // padding: 0 5vw;
         height: 0;
         transform: translate(-50%,-50%);
@@ -589,9 +594,9 @@ figcaption {
         top: 50%;
         left: 50%;
         border: 1px solid;
-        width: 0.5em;
-        height: 0.5em;
-        transform: translate(-50%,-50%);
+        width: 0.33em;
+        height: 0.33em;
+        transform: translate(-50%,-50%) rotate(45deg);
         background-color: inherit;
       }
     }
@@ -655,3 +660,48 @@ figcaption {
   /*End of .themeButtons*/
 }
 /*End of .App*/
+// @media screen and (any-pointer: "rough") or (any-pointer: "fine") {
+@include media("<tablet") {
+  h1 {
+    font-size: 2.5rem !important;
+  }
+
+  h2 {
+    font-size: 2rem !important;
+  }
+
+  .projectPage h3 {
+    font-size: 1.5rem !important;
+  }
+
+  h4 {
+    font-size: 1.25rem !important;
+  }
+}
+@include media("<phone") {
+  h1 {
+    font-size: 2rem !important;
+  }
+
+  h2 {
+    font-size: 1.75rem !important;
+  }
+
+  h3 {
+    font-size: 1.25rem !important;
+  }
+
+  .projectPage h3 {
+    font-size: 1.1rem !important;
+  }
+
+  h4 {
+    font-size: 1rem !important;
+  }
+}
+
+.projectPage {
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+// }

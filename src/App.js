@@ -13,12 +13,13 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.themes = [];
-    for (let i = 0; i < 11; i++) {
+    const themeCount = 11;
+    for (let i = 0; i < themeCount; i++) {
       this.themes.push(i);
     }
 
     this.state = {
-      theme: Math.floor(Math.random() * this.themes.length),
+      theme: Math.floor(Math.random() * themeCount),
       dark: true,
       hash: ""
     };
@@ -106,6 +107,7 @@ class App extends Component {
   }
   componentDidMount() {
     this.handleHashChange();
+    setInterval(()=>resizeAll(),1000);
   }
 }
 
@@ -294,9 +296,20 @@ function ContentBlock(props) {
   const heading = props.heading
     ? <h4>{props.heading}</h4>
     : null;
+  const visualsBlock = props.visuals
+    ? (props.visuals.map(visual => (<VisualBlock key={visual.title} {...visual} className="contentVisual"/>)))
+    : null;
+  const singleVisual = props.visual
+    ? <VisualBlock key={props.heading + "visual"} {...props.visual} className="contentVisual"/>
+    : null;
+  const style = props.visuals
+    ? {
+      gridRow: "span " + props.visuals.length
+    }
+    : null;
   return (<React.Fragment>
-    <section key={props.heading} className={"contentSection" + (
-        props.visual
+    <section key={props.heading} style={style} className={"contentSection" + (
+        props.visual || props.visuals
         ? ""
         : " fullRow")}>
       {heading}
@@ -307,7 +320,8 @@ function ContentBlock(props) {
       }
 
     </section>
-    {props.visual && <VisualBlock key={props.heading + "visual"} {...props.visual} className="contentVisual"/>}
+    {singleVisual}
+    {visualsBlock}
   </React.Fragment>);
 }
 function VisualBlock(props) {
@@ -336,15 +350,17 @@ function Image(props) {
       alt,
       caption,
       defaultSrc,
+      className,
+      style,
       ...restProps
     } = props;
     const figcaption = caption
       ? <figcaption>{caption}</figcaption>
       : null;
-    return (<figure {...restProps}>
+    return (<figure {...restProps} className={(className || "") + " image"}>
       <picture >
         {sources.map(s => (<source media={s.media} key={s.src} srcSet={s.src} type={s.type}/>))}
-        <img src={defaultSrc} width={width} height={height} alt={alt}/>
+        <img src={defaultSrc} style={style} width={width} height={height} alt={alt}/>
       </picture>
       {figcaption}
     </figure>)
@@ -357,12 +373,13 @@ function Video({
   caption,
   width,
   fallBack,
+  className,
   height,
   ...props
 }) {
   const blurBackground = (
     fallBack
-    ? "blurBackground center"
+    ? "blurBackground"
     : "");
   const fallBackImage = fallBack
     ? {
@@ -377,8 +394,8 @@ function Video({
   setTimeout(() => {
     resize(fixedAspectChild.current)
   }, 500);
-  return (<figure {...props}>
-    <div className={blurBackground} style={fallBackImage} role="presentation">
+  return (<figure className={(className || "") + " video"} {...props}>
+    <div className={blurBackground + " center"} style={fallBackImage} role="presentation">
       <video ref={fixedAspectChild} controls="controls" data-preferredwidth={width} data-preferredheight={height} data-aspectratio={aspectRatio}>
         {
           Array.isArray(sources)
@@ -398,6 +415,7 @@ function VimeoEmbed({
   height,
   caption,
   fallBack,
+  className,
   ...props
 }) {
   const fixedAspectChild = React.createRef();
@@ -406,7 +424,7 @@ function VimeoEmbed({
   }, 500);
   const blurBackground = (
     fallBack
-    ? " blurBackground center"
+    ? " blurBackground"
     : "");
   const fallBackImage = fallBack
     ? {
@@ -429,8 +447,8 @@ function VimeoEmbed({
     mozallowfullscreen: "mozallowfullscreen",
     allowFullScreen: "allowFullScreen"
   }
-  return (<figure {...props} role="presentation">
-    <div className={blurBackground} style={fallBackImage} role="presentation">
+  return (<figure {...props} className={(className || "") + " video"} role="presentation">
+    <div className={blurBackground + " center"} style={fallBackImage} role="presentation">
       <iframe {...iframeProps}/>
     </div>
     {figcaption}

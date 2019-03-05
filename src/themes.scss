@@ -54,6 +54,23 @@
       outline: none;
     }
 
+    a {
+      &:link {
+        color: $heading;
+        opacity: 0.9;
+        text-decoration: none;
+      }
+      /* visited link */
+      &:visited {
+        color: $heading;
+        opacity: 0.8;
+      }
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
     .focusable,
     a,
     button,

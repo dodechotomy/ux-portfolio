@@ -27,7 +27,7 @@ function resize(el) {
   let height = Math.min(width * aspectRatio, preferredHeight);
   const constrainHeight = !im.lessThan('desktop');
   el.dataset['constrainheight'] = constrainHeight;
-  if (constrainHeight) { //el.dataset['constrainheight']) {
+  if (false && constrainHeight) { //el.dataset['constrainheight']) {
     height = Math.min(height, parentHeight);
   } else {
     height = Math.min(height, window.innerHeight);

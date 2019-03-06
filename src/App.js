@@ -211,34 +211,24 @@ class FilterSelect extends Component {
     </button>);
   }
 }
-class ProjectTile extends Component {
-  // constructor(props) {
-  //   super(props);
-  //
-  //    this.handleNavigation = this.handleNavigation.bind(this);
-  // }
-  render() {
-    // const tags = this.props.tags && this.props.tags.map(tag => <li key={tag}>{tag}</li>);
-    // const updateHash = () => this.props.updateHash(this.props.hash);
-    // const handleNavigation = this.props.activeOverlay
-    //   ? null
-    //   : updateHash;
-    const className = "tile thumbnailImage " + this.props.className + (
-      this.props.activeOverlay
-      ? " active"
-      : "");
-    const tileTitle = "tile-title-" + this.props.hash;
-    const style = {
-      backgroundImage: "url(" + this.props.thumbnail.src + ")"
-    };
-    return (<a href={"#" + this.props.hash} id={"tile-" + this.props.hash} style={style} aria-labelledby={tileTitle} className={className} {...tabIndex(this.props.disabled)} disabled={this.props.disabled}>
+function ProjectTile(props) {
+  const className = "tile thumbnailImage " + props.className + (
+    props.activeOverlay
+    ? " active"
+    : "");
+  const tileTitle = "tile-title-" + props.hash;
+  const style = {
+    ...props.style,
+    backgroundImage: "url(" + props.thumbnail.src + ")"
+  };
+  return (<a href={"#" + props.hash} id={"tile-" + props.hash} style={style} aria-labelledby={tileTitle} className={className} {...tabIndex(props.disabled)} disabled={props.disabled}>
 
-      <div className="backgroundColor">
-        <h3 id={tileTitle}>{this.props.name}</h3>
-        <TagList tags={this.props.tags}/> {this.props.description && (<p className="thumbnailDescription">{this.props.description}</p>)}
-      </div>
-    </a>);
-  }
+    <div className="backgroundColor">
+      <h3 id={tileTitle}>{props.name}</h3>
+      <TagList tags={props.tags}/> {props.description && (<p className="thumbnailDescription">{props.description}</p>)}
+    </div>
+  </a>);
+
 }
 // class ProjectThumbnail extends Component {
 //   render() {
@@ -374,19 +364,20 @@ function Gallery({
   sources,
   caption,
   root,
+  style,
   className,
   ...props
 }) {
   //TODO: Add a lightbox feature
-    const figcaption = caption
-      ? <figcaption>{caption}</figcaption>
-      : null;
-    return (<figure {...props} className={(className || "") + " gallery"}>
-        <div className="gallery-grid">
-          {sources.map(s => (<img key={s.src} src={root+s.src}  alt={s.alt}/>))}
-          </div>
-      {figcaption}
-    </figure>)
+  const figcaption = caption
+    ? <figcaption>{caption}</figcaption>
+    : null;
+  return (<figure {...props} className={(className || "") + " gallery"}>
+    <div className="gallery-grid">
+      {sources.map(s => (<img key={s.src} style={style} src={root + s.src} alt={s.alt}/>))}
+    </div>
+    {figcaption}
+  </figure>)
 }
 function Video({
   sources,

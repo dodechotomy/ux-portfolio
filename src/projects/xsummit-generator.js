@@ -1,8 +1,10 @@
+const bgColour = {backgroundColor:"rgba(236, 240, 243, 1)"};
 export default {
   name: "Autodesk X Summit Generator",
   tags: ["dev", "art", "ux"],
   description: "An interactive p5.js web app that generates unique, cohesive images for a design conference.",
   hash: "x-summit-generator",
+  style: bgColour,
   thumbnail: {
     type: "image",
     src: "http://dev.scott-wilson.ca/img/thumb/x-summit-generator.png",
@@ -21,6 +23,7 @@ It’s live online, at [xsummitgenerator.autodesk.com](http://xsummitgenerator.a
       visual: {
         type: "image",
         caption: "An example generated image.",
+        style: bgColour,
         sources: [{
           src: "http://dev.scott-wilson.ca/img/thumb/x-summit-generator.png",
           type: "image/png"
@@ -97,6 +100,7 @@ The main objectives for this project were:
       text: `This banner was part of the branding for the event and was designed by Greg Fowler. It was the source of the triangle/hexagon/cube motif of the images. The colours of the original branding were replaced with a new colour palette for the event. Componenets and patterns from this image were what I used to form the visual vocabulary coded into the generator.`,
       visual: {
         type: "image",
+        style: bgColour,
         caption: "The original branding for the event that the variations are based on. Designed by Greg Fowler.",
         sources: [{
           src: 'http://dev.scott-wilson.ca/img/x-summit-generator/originalbranding.png',
@@ -125,6 +129,7 @@ Almost every aspect of the generator is subject to some randomization, enabling 
         type: "gallery",
         root: "http://dev.scott-wilson.ca/img/x-summit-generator/gallery-2/",
         caption: "Pictures of the images used on signs, slideshows, and other places at the X Summit conference.",
+        style: bgColour,
         sources: [{
             src: "unnamed1.png",
             alt: "Seven large blue cubes on a pink hexagon in the foreground, very large green and blue cubes in the background."

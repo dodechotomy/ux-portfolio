@@ -1,5 +1,5 @@
 export default {
-  name: "Geometric Puzzle Box #1",
+  name: "Geometric Puzzle Box",
   tags: ["dev", "physical", "game design", "art", "fabrication"],
   description: "Mechanical puzzles embedded into a transforming geometrical form.",
   hash: "puzzle-box",
@@ -28,7 +28,7 @@ This was my final thesis project for the Bachelor of Interaction Design program 
   }, {
     heading: "Puzzle Conception and Design",
     type: "md",
-    text: `I started by looking at puzzles I personally loved. I drew inspiration from one puzzle in particular, called [Slitherlink][0], created by [Nikoli][1] who also created Sudoku. I used paper prototypes and recruited a variety of players to test out possible puzzle types. Some players came back to help test multiple iterations, and others were new to the project, only trying a single version. The main things I was looking for in a puzzle was that the rules can be learned without guidance or supervision, and that I could conceive of a way to make the puzzle in physical form.
+    text: `I started by looking at puzzles I personally loved. I drew inspiration from one puzzle in particular, called [Slitherlink](https://www.nikoli.co.jp/en/puzzles/slitherlink.html), created by [Nikoli](http://nikoli.co.jp/en/) who also created Sudoku. I used paper prototypes and recruited a variety of players to test out possible puzzle types. Some players came back to help test multiple iterations, and others were new to the project, only trying a single version. The main things I was looking for in a puzzle was that the rules can be learned without guidance or supervision, and that I could conceive of a way to make the puzzle in physical form.
 
 After creating and testing several different puzzle types, I landed on a rotating rings puzzle that worked well with the physical forms I was considering. This type of puzzle had a number of benefits:
 
@@ -40,8 +40,6 @@ After creating and testing several different puzzle types, I landed on a rotatin
 
 The last point was a very important part of this whole project coming together. Many of the puzzles I was looking at featured a solution that needed many elements to be correct, spread over the whole puzzle. This works great digitally, or with a person checking the solution, but I wanted something that could built to physically check its own solutions. So, these rotating ring puzzles are theoretically equivalent to a combination lock, a well-understood mechanism that I could confidently design to be 3D printed.
 
-[0]: https://www.nikoli.co.jp/en/puzzles/slitherlink.html
-[1]: http://nikoli.co.jp/en/
       `,
     visual: {
       type: "image",

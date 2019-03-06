@@ -107,7 +107,7 @@ class App extends Component {
   }
   componentDidMount() {
     this.handleHashChange();
-    setInterval(()=>resizeAll(),1000);
+    setInterval(() => resizeAll(), 1000);
   }
 }
 
@@ -324,18 +324,19 @@ function ContentBlock(props) {
     {visualsBlock}
   </React.Fragment>);
 }
-function VisualBlock(props) {
-  const {
-    type,
-    ...newProps
-  } = props;
+function VisualBlock({
+  type,
+  ...props
+}) {
   switch (type) {
     case "image":
-      return <Image {...newProps}/>
+      return <Image {...props}/>
     case "video":
-      return <Video {...newProps}/>
+      return <Video {...props}/>
     case "vimeo":
-      return <VimeoEmbed {...newProps}/>
+      return <VimeoEmbed {...props}/>
+    case "gallery":
+      return <Gallery {...props}/>
     default:
       return null;
   }
@@ -367,6 +368,25 @@ function Image(props) {
   } else {
     return (<img {...props}/>);
   }
+}
+
+function Gallery({
+  sources,
+  caption,
+  root,
+  className,
+  ...props
+}) {
+  //TODO: Add a lightbox feature
+    const figcaption = caption
+      ? <figcaption>{caption}</figcaption>
+      : null;
+    return (<figure {...props} className={(className || "") + " gallery"}>
+        <div className="gallery-grid">
+          {sources.map(s => (<img key={s.src} src={root+s.src}  alt={s.alt}/>))}
+          </div>
+      {figcaption}
+    </figure>)
 }
 function Video({
   sources,

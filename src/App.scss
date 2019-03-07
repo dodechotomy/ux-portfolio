@@ -111,10 +111,15 @@ body {
     // z-index: 3;
     padding-bottom: 1rem;
   }
+  footer{
+    margin-bottom: 2rem;
+    text-align: right;
+      padding-right:  1rem;
+  }
 
   .filterButtons,
   .tileList,
-  header {
+  header,footer {
     padding-left: 1rem;
   }
 

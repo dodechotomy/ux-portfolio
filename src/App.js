@@ -8,6 +8,7 @@ import "./App.scss";
 import "./themes.scss";
 import {resize, resizeAll} from './fixedAspectRatio.js'
 const ReactMarkdown = require('react-markdown')
+const email ="mailto:me.scottwilson@gmail.com";
 
 class App extends Component {
   constructor(props) {
@@ -60,11 +61,11 @@ class App extends Component {
       <header role="banner">
         <h1>Scott Wilson</h1>
         <h2>Interaction Design Portfolio</h2>
-        <p className="subtitle">Hire me!</p>
+        <a className="subtitle" href={email}>Hire me!</a>
         <ThemeButtons disabled={overlayIsActive} changeTheme={this.changeTheme} dark={this.state.dark} toggleDarkMode={this.toggleDarkMode}/>
       </header>
       <FilteredTileList disabled={overlayIsActive} items={projects} tags={navTags} hash={this.state.hash}/>
-
+      <footer><a  href={email}>me.scottwilson@gmail.com</a></footer>
     </div>);
   }
   /*         <Motion
@@ -96,11 +97,13 @@ class App extends Component {
         if (focusElement) {
           focusElement.focus();
           focusElement.scrollTo(0, 0);
+          document.body.style.overflowY = "hidden";
         }
       } else if (oldHash) {
         const focusElement = document.getElementById("tile-" + oldHash);
         if (focusElement) {
           focusElement.focus();
+          document.body.style.overflowY = "";
         }
       }
     }

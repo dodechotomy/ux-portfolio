@@ -21,7 +21,7 @@ The project is still ongoing, currently in the fabrication phase.
       `,
     visual: {
       type: "image",
-      caption: "A render of the puzzle sphere.",
+      caption: "A mockup of the design, with an example projection.",
       sources: [{
         src: 'http://dev.scott-wilson.ca/img/wip/WIP mockup.jpg',
         type: "image/jpg"

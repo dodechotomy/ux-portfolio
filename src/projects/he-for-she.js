@@ -2,7 +2,7 @@ export default {
   name: "HeForShe Kinetic Typography",
   tags: ["dev", "physical", "game design"],
   description: "Impactful motion graphics video project",
-  hash: "escape-from-the-tower",
+  hash: "he-for-she",
   thumbnail: {
     type: "image",
     src: "http://dev.scott-wilson.ca/img/thumb/he-for-she.png",

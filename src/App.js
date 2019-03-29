@@ -1,4 +1,4 @@
-import React, {useState, Component} from 'react';
+import React, {Component} from 'react';
 import $ from 'jquery'
 import {projects, navTags} from "./portfolio-content";
 // import "node_modules/include-media-export/dist/include-media-1.0.2.min.js"
@@ -6,13 +6,11 @@ import {projects, navTags} from "./portfolio-content";
 // import im from "../node_modules/include-media-export/include-media.js"
 import "./App.scss";
 import "./themes.scss";
-import {resize, resizeAll} from './fixedAspectRatio.js'
-import {FilteredTileGrid} from "./components/FilteredTileGrid/FilteredTileGrid.js"
-import {TagList} from "./components/TagList.js"
-import {tabIndex} from "./util.js"
-
-const email = "mailto:me.scottwilson@gmail.com";
-
+import {resizeAll} from './fixedAspectRatio'
+import {FilteredTileGrid} from "./components/FilteredTileGrid/FilteredTileGrid"
+import {ThemeButtons} from "./components/ThemeButtons"
+import {About} from "./components/About"
+import {email, emailLink} from "./portfolio-content"
 
 class App extends Component {
   constructor(props) {
@@ -65,12 +63,15 @@ class App extends Component {
       <header role="banner">
         <h1>Scott Wilson</h1>
         <h2>Interaction Design Portfolio</h2>
-        <a className="subtitle" href={email}>Hire me!</a>
+        <a href={"mailto:" + email} title="Email Me">Contact</a>
+        <span>{" | "}</span>
+        <a href="#about">About Me</a>
         <ThemeButtons disabled={overlayIsActive} changeTheme={this.changeTheme} dark={this.state.dark} toggleDarkMode={this.toggleDarkMode}/>
       </header>
       <FilteredTileGrid disabled={overlayIsActive} items={projects} tags={navTags} hash={this.state.hash}/>
+      <About hash={this.state.hash} disabled={false} active={true}/>
       <footer>
-        <a href={email}>me.scottwilson@gmail.com</a>
+        {emailLink}
       </footer>
     </div>);
   }
@@ -109,8 +110,8 @@ class App extends Component {
         const focusElement = document.getElementById("tile-" + oldHash);
         if (focusElement) {
           focusElement.focus();
-          document.body.style.overflowY = "";
         }
+        document.body.style.overflowY = "";
       }
     }
   }
@@ -119,18 +120,5 @@ class App extends Component {
     setInterval(() => resizeAll(), 1000);
   }
 }
-
-function ThemeButtons(props) {
-  return (<div className="themeButtons">
-    <button onClick={props.changeTheme}>mix it up</button>
-    <button aria-pressed={props.dark} className={"toggleButton vertical " + (
-        props.dark
-        ? "selected"
-        : "")} onClick={props.toggleDarkMode}>
-      dark mode
-    </button>
-  </div>);
-}
-
 
 export default App;

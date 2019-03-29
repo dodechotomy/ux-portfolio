@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import {FilterSelect} from "./FilterSelect.js";
-import {ProjectTile} from "./ProjectTile.js";
-import {ProjectOverlay} from "../ProjectOverlay/ProjectOverlay.js"
+import {FilterSelect} from "./FilterSelect";
+import {ProjectTile} from "./ProjectTile";
+import {ProjectOverlay} from "../ProjectOverlay/ProjectOverlay"
 
 export function FilteredTileGrid(props) {
   const [activeFilters, setActiveFilters] = useState([]);

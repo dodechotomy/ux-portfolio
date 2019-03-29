@@ -1,5 +1,5 @@
 import React from 'react';
-import {tabIndex} from "../util.js"
+import {tabIndex} from "../util"
 
 export function ToggleButton(props) {
   const className = props.className + (

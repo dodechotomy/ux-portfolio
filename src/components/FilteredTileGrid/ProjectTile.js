@@ -1,6 +1,6 @@
 import React from 'react';
-import {TagList} from "../TagList.js"
-import {tabIndex} from "../../util.js"
+import {TagList} from "../TagList"
+import {tabIndex} from "../../util"
 
 export function ProjectTile(props) {
   const className = "tile thumbnailImage " + props.className + (

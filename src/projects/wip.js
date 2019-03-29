@@ -1,6 +1,6 @@
 export default {
   name: "W.I.P Installation",
-  tags: ["dev", "physical", "art"],
+  tags: ["coding", "physical", "art"],
   description: "A large projection-mapped sculptural installation using Rhino 3D, Grasshopper, and TouchDesigner",
   hash: "w-i-p",
   thumbnail: {

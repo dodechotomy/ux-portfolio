@@ -1,5 +1,5 @@
 import React from 'react';
-import {ToggleButton} from "../ToggleButton.js"
+import {ToggleButton} from "../ToggleButton"
 
 export function FilterSelect(props) {
   const buttons = props.tags.map(tag => {
@@ -16,6 +16,6 @@ export function FilterSelect(props) {
     return <ToggleButton {...tagProps} key={tag}/>
   })
   return (<div aria-label="Filter by" className="filterButtons">
-    {buttons}
+    <span className="filterLabel">Filter Projects: </span>{buttons}
   </div>);
 }

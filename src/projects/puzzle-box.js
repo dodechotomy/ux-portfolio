@@ -1,6 +1,6 @@
 export default {
   name: "Geometric Puzzle Box",
-  tags: ["dev", "physical", "game design", "art", "fabrication"],
+  tags: ["coding", "physical", "game design", "art", "fabrication"],
   description: "Mechanical puzzles embedded into a transforming geometrical form.",
   hash: "puzzle-box",
   thumbnail: {

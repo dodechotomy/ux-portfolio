@@ -1,6 +1,6 @@
 export default {
   name: "HeForShe Kinetic Typography",
-  tags: ["dev", "physical", "game design"],
+  tags: ["typography", "motion graphics"],
   description: "Impactful motion graphics video project",
   hash: "he-for-she",
   thumbnail: {

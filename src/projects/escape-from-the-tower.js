@@ -1,6 +1,6 @@
 export default {
   name: "Escape from the Tower",
-  tags: ["dev", "physical", "game design"],
+  tags: ["coding", "physical", "game design"],
   description: "An interactive p5.js web app that generates unique, cohesive images for a design conference.",
   hash: "escape-from-the-tower",
   thumbnail: {

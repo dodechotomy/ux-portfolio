@@ -1,7 +1,7 @@
 const bgColour = {backgroundColor:"rgba(236, 240, 243, 1)"};
 export default {
   name: "Autodesk X Summit Generator",
-  tags: ["dev", "art", "ux"],
+  tags: ["coding", "art", "ux"],
   description: "An interactive p5.js web app that generates unique, cohesive images for a design conference.",
   hash: "x-summit-generator",
   style: bgColour,

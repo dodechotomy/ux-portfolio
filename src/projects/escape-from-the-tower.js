@@ -5,7 +5,7 @@ export default {
   hash: "escape-from-the-tower",
   thumbnail: {
     type: "image",
-    src: "http://dev.scott-wilson.ca/img/thumb/escape-from-the-tower.jpg",
+    src: "http://scott-wilson.ca/img/thumb/escape-from-the-tower.jpg",
     alt: "A colorful scattering of triangles and cubes from the generator."
   },
   content: [{
@@ -26,10 +26,10 @@ The Casa Loma Escape series is rated 4.5 stars on [Trip Advisor Canada](https://
         type: "image",
         caption: "The first floor of the tower. Photograph 2017 All Rights Reserved. Company & Co.",
         sources: [{
-          src: "http://dev.scott-wilson.ca/img/escape-from-the-tower/switch.jpg",
+          src: "http://scott-wilson.ca/img/escape-from-the-tower/switch.jpg",
           type: "image/jpg"
         }],
-        defaultSrc: "http://dev.scott-wilson.ca/img/escape-from-the-tower/switch.jpg",
+        defaultSrc: "http://scott-wilson.ca/img/escape-from-the-tower/switch.jpg",
         alt: "A large electric power switch sitting on a table, with puzzles visible in the background."
       }
     },
@@ -58,10 +58,10 @@ When all four circuits complete, a card dispenser spits out a pre-punched card t
         type: "image",
         caption: "Players input German U-boat coordinates into a converted telephone switchboard. Photograph by me, puzzle 2015 All Rights Reserved. Company & Co.",
         sources: [{
-          src: 'http://dev.scott-wilson.ca/img/escape-from-the-tower/coordinates.jpg',
+          src: 'http://scott-wilson.ca/img/escape-from-the-tower/coordinates.jpg',
           type: "image/png"
         }],
-        defaultSrc: 'http://dev.scott-wilson.ca/img/escape-from-the-tower/coordinates.jpg',
+        defaultSrc: 'http://scott-wilson.ca/img/escape-from-the-tower/coordinates.jpg',
         alt: "An antique telephone switchboard, with patch cables and rows of telephone jack sockets."
       }
     }, {
@@ -87,10 +87,10 @@ Once all ten pieces are present, the table dispenses a fuse, which is one of fou
         type: "image",
         caption: "Players assemble copper piping to complete an electrical circuit. Photo and puzzle copyright 2015 All Rights Reserved. Company & Co.",
         sources: [{
-          src: 'http://dev.scott-wilson.ca/img/escape-from-the-tower/pipes.jpg',
+          src: 'http://scott-wilson.ca/img/escape-from-the-tower/pipes.jpg',
           type: "image/png"
         }],
-        defaultSrc: 'http://dev.scott-wilson.ca/img/escape-from-the-tower/pipes.jpg',
+        defaultSrc: 'http://scott-wilson.ca/img/escape-from-the-tower/pipes.jpg',
         alt: "A close up of players' hands touching and gesturing at a grid of copper pipes on the table."
       }
     },
@@ -117,10 +117,10 @@ Once the three dials are in the right positions, the box dispenses a fuse, just 
         type: "image",
         caption: "Players solve a mathematical relationship to restore power. Photograph by me, puzzle copyright 2015 All Rights Reserved. Company & Co.",
         sources: [{
-          src: 'http://dev.scott-wilson.ca/img/escape-from-the-tower/gauges.jpg',
+          src: 'http://scott-wilson.ca/img/escape-from-the-tower/gauges.jpg',
           type: "image/png"
         }],
-        defaultSrc: 'http://dev.scott-wilson.ca/img/escape-from-the-tower/gauges.jpg',
+        defaultSrc: 'http://scott-wilson.ca/img/escape-from-the-tower/gauges.jpg',
         alt: "27 gauges in an electrical panel and instructions make up the puzzle."
       }
     },
@@ -148,10 +148,10 @@ This puzzle didn't require electronics, instead, I designed the pieces in Illust
         caption: "Players reconstruct a topographical map from hidden puzzle pieces. Photograph by me, puzzle copyright 2015 All Rights Reserved. Company & Co.",
         alt:"A close up of lasercut wooden topographical map pieces on the table.",
         sources: [{
-          src: 'http://dev.scott-wilson.ca/img/escape-from-the-tower/topographical.jpg',
+          src: 'http://scott-wilson.ca/img/escape-from-the-tower/topographical.jpg',
           type: "image/png"
         }],
-        defaultSrc: 'http://dev.scott-wilson.ca/img/escape-from-the-tower/topographical.jpg',
+        defaultSrc: 'http://scott-wilson.ca/img/escape-from-the-tower/topographical.jpg',
       }
     },
     {

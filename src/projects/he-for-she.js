@@ -5,7 +5,7 @@ export default {
   hash: "he-for-she",
   thumbnail: {
     type: "image",
-    src: "http://dev.scott-wilson.ca/img/thumb/he-for-she.png",
+    src: "/img/thumb/he-for-she.png",
     alt: "Black and white text on a pink background reading 'If we stop defining eachother by what we are not and start defining ourselves by who we are we can all be freer'. Icons representing aspects of identities and professions surround the text."
   },
   content: [{
@@ -28,7 +28,7 @@ I created a video using kinetic typography to portray the words of the speech. I
       width: 1280,
       height: 720,
       title: "HeForShe kinetic typography",
-      // fallBack: "http://dev.scott-wilson.ca/img/ducks.jpg"
+      // fallBack: "/img/ducks.jpg"
     }
   }]
 }

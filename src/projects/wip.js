@@ -5,7 +5,7 @@ export default {
   hash: "w-i-p",
   thumbnail: {
     type: "image",
-    src: "http://dev.scott-wilson.ca/img/thumb/w-i-p.jpg",
+    src: "/img/thumb/w-i-p.jpg",
     alt: "A mockup of the design, with an example projection"
   },
   content: [{
@@ -23,10 +23,10 @@ The project is still ongoing, currently in the fabrication phase.
       type: "image",
       caption: "A mockup of the design, with an example projection.",
       sources: [{
-        src: 'http://dev.scott-wilson.ca/img/wip/WIP mockup.jpg',
+        src: '/img/wip/WIP-mockup.jpg',
         type: "image/jpg"
       }],
-      defaultSrc: 'http://dev.scott-wilson.ca/img/wip/WIP mockup.jpg',
+      defaultSrc: '/img/wip/WIP-mockup.jpg',
       alt: "A mockup of the design, with an example projection."
     }
   }, {
@@ -42,10 +42,10 @@ The project is still ongoing, currently in the fabrication phase.
       type: "image",
       caption: "An example of the geometry generated in Rhino and Grasshopper.",
       sources: [{
-        src: 'http://dev.scott-wilson.ca/img/wip/Rhinoceros Geometry.png',
+        src: '/img/wip/Rhinoceros-Geometry.png',
         type: "image/png"
       }],
-      defaultSrc: 'http://dev.scott-wilson.ca/img/wip/Rhinoceros Geometry.png',
+      defaultSrc: '/img/wip/Rhinoceros-Geometry.png',
       alt: "A mockup of the design, with an example projection."
     }
   }, {
@@ -57,10 +57,10 @@ The project is still ongoing, currently in the fabrication phase.
       type: "image",
       caption: "The base form, with stellated spikes.",
       sources: [{
-        src: 'http://dev.scott-wilson.ca/img/wip/2 stellated mesh.png',
+        src: '/img/wip/2-stellated-mesh.png',
         type: "image/png"
       }],
-      defaultSrc: 'http://dev.scott-wilson.ca/img/wip/2 stellated mesh.png',
+      defaultSrc: '/img/wip/2-stellated-mesh.png',
       alt: "A mockup of the design, with an example projection."
     }
   }, {
@@ -83,15 +83,15 @@ In order to organize our production and assembly, I create a system in Grasshopp
       width: 1280,
       height: 720,
       title:"WIP Grasshopper Demonstration",
-      // fallBack: "http://dev.scott-wilson.ca/img/ducks.jpg"
+      // fallBack: "/img/ducks.jpg"
     },{
       type: "image",
       caption: "The full Grasshopper network, including geometry generation, data extraction, and vector file export.",
       sources: [{
-        src: 'http://dev.scott-wilson.ca/img/wip/GrasshopperArtboard.png',
+        src: '/img/wip/GrasshopperArtboard.png',
         type: "image/png"
       }],
-      defaultSrc: 'http://dev.scott-wilson.ca/img/wip/GrasshopperArtboard.png',
+      defaultSrc: '/img/wip/GrasshopperArtboard.png',
       alt: "A mockup of the design, with an example projection.",
       style:{backgroundColor: "white"}
     }]
@@ -111,10 +111,10 @@ I 3D printed a few versions of the design for a scale model of the space, in ord
       type: "image",
       caption: "The flow of data from model to fabrication.",
       sources: [{
-        src: 'http://dev.scott-wilson.ca/img/wip/DimensionsExtraction.png',//http://dev.scott-wilson.ca/img/wip/GrasshopperArtboard 1@3x.png',
+        src: '/img/wip/DimensionsExtraction.png',///img/wip/GrasshopperArtboard 1@3x.png',
         type: "image/png"
       }],
-      defaultSrc: 'http://dev.scott-wilson.ca/img/wip/DimensionsExtraction.png',
+      defaultSrc: '/img/wip/DimensionsExtraction.png',
       alt: "A diagram showing the flow of data from model to fabrication.",
       style:{backgroundColor: "white"}
     }
@@ -132,15 +132,15 @@ For pitch presentations and in-progress gallery exhibits, I’ve created a parti
       width: 1280,
       height: 720,
       title:"WIP Installation Projection Mapping Demo",
-      // fallBack: "http://dev.scott-wilson.ca/img/ducks.jpg"
+      // fallBack: "/img/ducks.jpg"
     },{
       type: "image",
       caption: "Projection mapping running on a prototype fragment.",
       sources: [{
-        src: 'http://dev.scott-wilson.ca/img/wip/Prototype Projection Mapping.jpg',//http://dev.scott-wilson.ca/img/wip/GrasshopperArtboard 1@3x.png',
+        src: '/img/wip/Prototype-Projection-Mapping.jpg',///img/wip/GrasshopperArtboard 1@3x.png',
         type: "image/jpg"
       }],
-      defaultSrc: 'http://dev.scott-wilson.ca/img/wip/Prototype Projection Mapping.jpg',
+      defaultSrc: '/img/wip/Prototype-Projection-Mapping.jpg',
       alt: "Projection mapping running on a prototype fragment."
     }]
   },  {
@@ -152,10 +152,10 @@ For pitch presentations and in-progress gallery exhibits, I’ve created a parti
       type: "image",
       caption: "Left to right: Doug Donald, Scott Wilson, Claire Ironside. Photo credit Duncan Foy.",
       sources: [{
-        src: 'http://dev.scott-wilson.ca/img/wip/WIP Team.png',//http://dev.scott-wilson.ca/img/wip/GrasshopperArtboard 1@3x.png',
+        src: '/img/wip/WIP-Team.png',///img/wip/GrasshopperArtboard 1@3x.png',
         type: "image/png"
       }],
-      defaultSrc: 'http://dev.scott-wilson.ca/img/wip/WIP Team.png',
+      defaultSrc: '/img/wip/WIP-Team.png',
       alt: "Doug Donald, Scott Wilson, Claire Ironside. Photo credit Duncan Foy."
     }
   }]

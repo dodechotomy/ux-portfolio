@@ -5,7 +5,7 @@ export default {
   hash: "puzzle-box",
   thumbnail: {
     type: "image",
-    src: "http://dev.scott-wilson.ca/img/thumb/puzzle-box.png",
+    src: "/img/thumb/puzzle-box.png",
     alt: "A render of the puzzle sphere."
   },
   content: [{
@@ -19,10 +19,10 @@ This was my final thesis project for the Bachelor of Interaction Design program 
       type: "image",
       caption: "A render of the final design.",
       sources: [{
-        src: 'http://dev.scott-wilson.ca/img/puzzle-box/Geometric Puzzle Box 1.png',
+        src: '/img/puzzle-box/Geometric-Puzzle-Box-1.png',
         type: "image/png"
       }],
-      defaultSrc: 'http://dev.scott-wilson.ca/img/puzzle-box/Geometric Puzzle Box 1.png',
+      defaultSrc: '/img/puzzle-box/Geometric-Puzzle-Box-1.png',
       alt: "A render of the puzzle sphere."
     }
   }, {
@@ -45,10 +45,10 @@ The last point was a very important part of this whole project coming together. 
       type: "image",
       caption: "An example puzzle, in the solved position.",
       sources: [{
-        src: 'http://dev.scott-wilson.ca/img/puzzle-box/Rotating Rings Puzzle.png',
+        src: '/img/puzzle-box/Rotating-Rings-Puzzle.png',
         type: "image/png"
       }],
-      defaultSrc: 'http://dev.scott-wilson.ca/img/puzzle-box/Rotating Rings Puzzle.png',
+      defaultSrc: '/img/puzzle-box/Rotating-Rings-Puzzle.png',
       alt: "An example puzzle, in the solved position."
     }
   }, {
@@ -60,10 +60,10 @@ The last point was a very important part of this whole project coming together. 
       type: "image",
       caption: "The five platonic solids, plus a cuboctahedron and a rhombic dodecahedron",
       sources: [{
-        src: 'http://dev.scott-wilson.ca/img/puzzle-box/polyhedra.png',
+        src: '/img/puzzle-box/polyhedra.png',
         type: "image/png"
       }],
-      defaultSrc: 'http://dev.scott-wilson.ca/img/puzzle-box/polyhedra.png',
+      defaultSrc: '/img/puzzle-box/polyhedra.png',
       alt: "The five platonic solids, plus a cuboctahedron and a rhombic dodecahedron"
     }
   }, {
@@ -87,10 +87,10 @@ I coded the generator in [p5.js](https://p5js.org/), gave it a simple HTML inter
       type: "image",
       caption: "The interface of the puzzle generator.",
       sources: [{
-        src: 'http://dev.scott-wilson.ca/img/puzzle-box/generator.png',
+        src: '/img/puzzle-box/generator.png',
         type: "image/png"
       }],
-      defaultSrc: 'http://dev.scott-wilson.ca/img/puzzle-box/generator.png',
+      defaultSrc: '/img/puzzle-box/generator.png',
       alt: "The interface of the puzzle generator."
     }
   }, {
@@ -107,10 +107,10 @@ The particular shape of the sliding bar and the inner track of the rotating ring
       type: "image",
       caption: "A cross-section of the final rotating rings module design.",
       sources: [{
-        src: 'http://dev.scott-wilson.ca/img/puzzle-box/RotRings v122.png',
+        src: '/img/puzzle-box/RotRings-v122.png',
         type: "image/png"
       }],
-      defaultSrc: 'http://dev.scott-wilson.ca/img/puzzle-box/RotRings v122.png',
+      defaultSrc: '/img/puzzle-box/RotRings-v122.png',
       alt: "A cross-section of the final rotating rings module design.",
     }
   }, {
@@ -127,7 +127,7 @@ All-in-all, the fabrication was one of the most challenging parts, between maint
       width: 1280,
       height: 720,
       title: "Geometric Puzzle Box #1",
-      // fallBack: "http://dev.scott-wilson.ca/img/ducks.jpg"
+      // fallBack: "/img/ducks.jpg"
     }
   }, {
     heading: "Future Steps",
@@ -159,10 +159,10 @@ There are many hollow or empty sections of the form that could be used better to
       type: "image",
       caption: "One of the core pieces, and the small hinges attached to it.",
       sources: [{
-        src: 'http://dev.scott-wilson.ca/img/puzzle-box/AmbiDodec Pin Clip Hinge v96.png',
+        src: '/img/puzzle-box/AmbiDodec-Pin-Clip-Hinge-v96.png',
         type: "image/png"
       }],
-      defaultSrc: 'http://dev.scott-wilson.ca/img/puzzle-box/AmbiDodec Pin Clip Hinge v96.png',
+      defaultSrc: '/img/puzzle-box/AmbiDodec-Pin-Clip-Hinge-v96.png',
       alt: "One of the core pieces, and the small hinges attached to it."
     }
   }]

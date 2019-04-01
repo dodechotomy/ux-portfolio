@@ -6,7 +6,7 @@ export const projects = [{
     hash: "puzzle-box",
     thumbnail: {
       type: "image",
-      src: "http://dev.scott-wilson.ca/img/thumb/puzzle-box.png",
+      src: "http://scott-wilson.ca/img/thumb/puzzle-box.png",
       width: 320,
       height: 320,
       alt: "A render of the puzzle sphere."
@@ -24,19 +24,19 @@ Over the course of the project I’ve been responsible for a number of things. I
         type: "image",
         caption:"A render of the puzzle sphere.",
         sources: [{
-          src: 'http://dev.scott-wilson.ca/img/thumb/puzzle-box.png',
+          src: 'http://scott-wilson.ca/img/thumb/puzzle-box.png',
           type: "image/png",
           media: "(min-width: 1024px)"
         },{
-          src: 'http://dev.scott-wilson.ca/img/puzzle-box-vertical.png',
+          src: 'http://scott-wilson.ca/img/puzzle-box-vertical.png',
           type: "image/png",
           media: "(orientation: portrait)"
         },{
-          src: 'http://dev.scott-wilson.ca/img/puzzle-box-square.png',
+          src: 'http://scott-wilson.ca/img/puzzle-box-square.png',
           type: "image/png",
           media: "(min-width: 200px)"
         }],
-          defaultSrc: 'http://dev.scott-wilson.ca/img/puzzle-box-square.png',
+          defaultSrc: 'http://scott-wilson.ca/img/puzzle-box-square.png',
         // width: 600,
         // height: 360,
         alt: "A render of the puzzle sphere."
@@ -54,19 +54,19 @@ Over the course of the project I’ve been responsible for a number of things. I
         type: "image",
         caption:"A render of the puzzle sphere.",
         sources: [{
-          src: 'http://dev.scott-wilson.ca/img/thumb/puzzle-box.png',
+          src: 'http://scott-wilson.ca/img/thumb/puzzle-box.png',
           type: "image/png",
           media: "(min-width: 1024px)"
         },{
-          src: 'http://dev.scott-wilson.ca/img/puzzle-box-vertical.png',
+          src: 'http://scott-wilson.ca/img/puzzle-box-vertical.png',
           type: "image/png",
           media: "(orientation: portrait)"
         },{
-          src: 'http://dev.scott-wilson.ca/img/puzzle-box-square.png',
+          src: 'http://scott-wilson.ca/img/puzzle-box-square.png',
           type: "image/png",
           media: "(min-width: 200px)"
         }],
-          defaultSrc: 'http://dev.scott-wilson.ca/img/puzzle-box-square.png',
+          defaultSrc: 'http://scott-wilson.ca/img/puzzle-box-square.png',
         // width: 600,
         // height: 360,
         alt: "A render of the puzzle sphere."
@@ -84,7 +84,7 @@ Over the course of the project I’ve been responsible for a number of things. I
         // width: 640,
         // height: 1382,
         title: "Geometric Puzzle Sphere - Interaction",
-        fallBack: "http://dev.scott-wilson.ca/img/ducks.jpg"
+        fallBack: "http://scott-wilson.ca/img/ducks.jpg"
       }
     },{
       heading: "Heading 3",
@@ -99,7 +99,7 @@ Over the course of the project I’ve been responsible for a number of things. I
         width: 640,
         height: 1138,
         title: "Geometric Puzzle Sphere - Interaction",
-        fallBack: "http://dev.scott-wilson.ca/img/ducks.jpg"
+        fallBack: "http://scott-wilson.ca/img/ducks.jpg"
       }
     }, {
       heading: "Heading 4",
@@ -108,12 +108,12 @@ Over the course of the project I’ve been responsible for a number of things. I
         type: "video",
         caption:"A render of the puzzle sphere.",
         sources: [{
-          src: 'http://dev.scott-wilson.ca/vid/scott-wilson-puzzle-cube-interaction.mp4',
+          src: 'http://scott-wilson.ca/vid/scott-wilson-puzzle-cube-interaction.mp4',
           type: "video/mp4"
         }],
         width: 720,
         height: 1280,
-        fallBack: "http://dev.scott-wilson.ca/img/ducks.jpg"
+        fallBack: "http://scott-wilson.ca/img/ducks.jpg"
       }
     }]
   },
@@ -124,7 +124,7 @@ Over the course of the project I’ve been responsible for a number of things. I
     hash: "w-i-p",
     thumbnail: {
       type: "image",
-      src: "http://dev.scott-wilson.ca/img/thumb/w-i-p.jpg",
+      src: "http://scott-wilson.ca/img/thumb/w-i-p.jpg",
       width: 320,
       height: 320,
       alt: "A render of the puzzle sphere."
@@ -137,7 +137,7 @@ Over the course of the project I’ve been responsible for a number of things. I
     hash: "escape-from-the-tower",
     thumbnail: {
       type: "image",
-      src: "http://dev.scott-wilson.ca/img/thumb/escape-from-the-tower.jpg",
+      src: "http://scott-wilson.ca/img/thumb/escape-from-the-tower.jpg",
       width: 320,
       height: 320,
       alt: "A render of the puzzle sphere."
@@ -150,7 +150,7 @@ Over the course of the project I’ve been responsible for a number of things. I
     hash: "he-for-she",
     thumbnail: {
       type: "image",
-      src: "http://dev.scott-wilson.ca/img/thumb/he-for-she.png",
+      src: "http://scott-wilson.ca/img/thumb/he-for-she.png",
       width: 320,
       height: 320,
       alt: "A render of the puzzle sphere."
@@ -163,7 +163,7 @@ Over the course of the project I’ve been responsible for a number of things. I
     hash: "canadian-youth",
     thumbnail: {
       type: "image",
-      src: "http://dev.scott-wilson.ca/img/thumb/canadian-youth.jpg",
+      src: "http://scott-wilson.ca/img/thumb/canadian-youth.jpg",
       width: 320,
       height: 320,
       alt: "A render of the puzzle sphere."
@@ -176,7 +176,7 @@ Over the course of the project I’ve been responsible for a number of things. I
     hash: "toronto-fringe-festival",
     thumbnail: {
       type: "image",
-      src: "http://dev.scott-wilson.ca/img/thumb/toronto-fringe-festival.png",
+      src: "http://scott-wilson.ca/img/thumb/toronto-fringe-festival.png",
       width: 320,
       height: 320,
       alt: "A render of the puzzle sphere."
@@ -189,7 +189,7 @@ Over the course of the project I’ve been responsible for a number of things. I
     hash: "slate",
     thumbnail: {
       type: "image",
-      src: "http://dev.scott-wilson.ca/img/thumb/slate.png",
+      src: "http://scott-wilson.ca/img/thumb/slate.png",
       width: 320,
       height: 320,
       alt: "A render of the puzzle sphere."

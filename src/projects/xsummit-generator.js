@@ -7,11 +7,7 @@ export default {
   style: bgColour,
   thumbnail: {
     type: "image",
-<<<<<<< HEAD
     src: "/img/thumb/x-summit-generator.png",
-=======
-    src: "http://scott-wilson.ca/img/thumb/x-summit-generator.png",
->>>>>>> 9832f6faebba9871fb43c1d98e4bcdbd84efd1e5
     alt: "A colorful scattering of triangles and cubes from the generator."
   },
   content: [{
@@ -29,17 +25,10 @@ It’s live online, at [xsummitgenerator.autodesk.com](http://xsummitgenerator.a
         caption: "An example generated image.",
         style: bgColour,
         sources: [{
-<<<<<<< HEAD
           src: "/img/thumb/x-summit-generator.png",
           type: "image/png"
         }],
         defaultSrc: "/img/thumb/x-summit-generator.png",
-=======
-          src: "http://scott-wilson.ca/img/thumb/x-summit-generator.png",
-          type: "image/png"
-        }],
-        defaultSrc: "http://scott-wilson.ca/img/thumb/x-summit-generator.png",
->>>>>>> 9832f6faebba9871fb43c1d98e4bcdbd84efd1e5
         alt: "A colorful scattering of triangles and cubes from the generator."
       }
     },
@@ -56,17 +45,10 @@ The main objectives for this project were:
         type: "image",
         caption: "The generator's interface.",
         sources: [{
-<<<<<<< HEAD
           src: '/img/x-summit-generator/xsummit-interface.jpg',
           type: "image/png"
         }],
         defaultSrc: '/img/x-summit-generator/xsummit-interface.jpg',
-=======
-          src: 'http://scott-wilson.ca/img/x-summit-generator/xsummit-interface.jpg',
-          type: "image/png"
-        }],
-        defaultSrc: 'http://scott-wilson.ca/img/x-summit-generator/xsummit-interface.jpg',
->>>>>>> 9832f6faebba9871fb43c1d98e4bcdbd84efd1e5
         alt: "The generator's interface showing the control panel, and an image that was just generated."
       }
     }, {
@@ -76,11 +58,7 @@ The main objectives for this project were:
       visual: {
         type: "gallery",
         caption: "Pictures of the images used on signs, slideshows, and other places at the X Summit conference.",
-<<<<<<< HEAD
         root: "/img/x-summit-generator/gallery-1/",
-=======
-        root: "http://scott-wilson.ca/img/x-summit-generator/gallery-1/",
->>>>>>> 9832f6faebba9871fb43c1d98e4bcdbd84efd1e5
         sources: [{
             src: "IMG_20170926_123733.jpg",
             alt: "A large sign reading 'X Summit' with a busy, detailed image from the generator as the background."
@@ -125,17 +103,10 @@ The main objectives for this project were:
         style: bgColour,
         caption: "The original branding for the event that the variations are based on. Designed by Greg Fowler.",
         sources: [{
-<<<<<<< HEAD
           src: '/img/x-summit-generator/originalbranding.png',
           type: "image/png"
         }],
         defaultSrc: '/img/x-summit-generator/originalbranding.png',
-=======
-          src: 'http://scott-wilson.ca/img/x-summit-generator/originalbranding.png',
-          type: "image/png"
-        }],
-        defaultSrc: 'http://scott-wilson.ca/img/x-summit-generator/originalbranding.png',
->>>>>>> 9832f6faebba9871fb43c1d98e4bcdbd84efd1e5
         alt: "Autodesk X Summit 2017 banner."
       }
     },
@@ -156,11 +127,7 @@ Almost every aspect of the generator is subject to some randomization, enabling 
 `,
       visual: {
         type: "gallery",
-<<<<<<< HEAD
         root: "/img/x-summit-generator/gallery-2/",
-=======
-        root: "http://scott-wilson.ca/img/x-summit-generator/gallery-2/",
->>>>>>> 9832f6faebba9871fb43c1d98e4bcdbd84efd1e5
         caption: "Pictures of the images used on signs, slideshows, and other places at the X Summit conference.",
         style: bgColour,
         sources: [{

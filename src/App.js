@@ -12,6 +12,7 @@ import {ThemeButtons} from "./components/ThemeButtons"
 import {About} from "./components/About"
 import {email, emailLink} from "./portfolio-content"
 
+// test
 class App extends Component {
   constructor(props) {
     super(props);
